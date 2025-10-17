@@ -1,0 +1,84 @@
+body {
+    font-family: 'Montserrat', sans-serif;
+    background-color: #f8f9fa;
+}
+
+.bg-black {
+    background-color: #000 !important;
+}
+
+.card-producto {
+    border: 1px solid #ddd; 
+    border-radius: 0; 
+    box-shadow: none;      
+    transition: all 0.2s ease-in-out;
+}
+
+.card-producto .card-body {
+    background-color: #212529;
+    padding: 1rem;
+    color: #fff;
+}
+
+.card-producto .card-title {
+    font-size: 1rem;      
+    font-weight: normal;  
+    margin-bottom: 0;     
+}
+
+.card-producto .card-img-top {
+    border-radius: 0;
+}
+
+/* =============================================================== */
+/* EFECTO HOVER                                                    */
+/* =============================================================== */
+.card-producto:hover {
+    transform: translateY(-10px); 
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2); 
+    border-color: #4A90E2;
+}
+
+.card-producto:hover .card-img {
+    transform: scale(1.1); 
+}
+
+/* =============================================================== */
+/* ESTILOS PARA EL OVERLAY DE DETALLES EN HOVER                    */
+/* =============================================================== */
+
+.card-img-wrapper {
+    position: relative;
+    overflow: hidden;
+}
+
+.card-details-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.7);
+    color: #fff; 
+    
+    /* Centramos el contenido (la lista) */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    /* Efecto de transición suave */
+    opacity: 0;
+    transition: opacity 0.3s ease-in-out;
+}
+
+.card-producto:hover .card-details-overlay {
+    opacity: 1; /* Lo mostramos */
+}
+
+.card-details-overlay ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    font-size: 1.1rem;
+    text-align: center;
+}
