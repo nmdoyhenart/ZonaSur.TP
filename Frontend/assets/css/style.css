@@ -1,0 +1,59 @@
+/* =============================================================== */
+/* ESTILOS GENERALES                                               */
+/* =============================================================== */
+body {
+    font-family: 'Montserrat', sans-serif;
+    background-color: #f8f9fa; /* Un gris muy claro para el fondo, resalta las cards */
+}
+
+/* Ajustamos el color de fondo del navbar y footer para un negro más solido */
+.bg-black {
+    background-color: #000 !important;
+}
+
+
+/* =============================================================== */
+/* ESTILO DE LAS TARJETAS DE PRODUCTO (LA MAGIA EMPIEZA AQUÍ)     */
+/* =============================================================== */
+
+/* Contenedor principal de la tarjeta */
+.card-producto {
+    border: none; /* Quitamos el borde por defecto de Bootstrap */
+    border-radius: 10px; /* Redondeamos las esquinas sutilmente */
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1); /* Sombra suave para dar profundidad */
+    overflow: hidden; /* Muy importante: oculta lo que se salga de la tarjeta (como el zoom de la imagen) */
+    transition: all 0.3s ease; /* Transición suave para todos los efectos hover */
+}
+
+/* La imagen dentro de la tarjeta */
+.card-producto .card-img {
+    height: 250px; /* Altura fija para que todas las tarjetas sean iguales */
+    object-fit: cover; /* Hace que la imagen cubra todo el espacio sin deformarse */
+    transition: transform 0.3s ease; /* Transición suave para el efecto de zoom */
+}
+
+/* El overlay con el gradiente y el texto */
+.card-producto .card-img-overlay {
+    /* Este gradiente es la clave: va de transparente a un negro sólido en la parte inferior */
+    background: linear-gradient(to top, rgba(0, 0, 0, 1) 0%, rgba(0, 0, 0, 0) 60%);
+    padding: 1.5rem; /* Más espacio interior para el texto */
+}
+
+/* Estilo para el título del auto */
+.card-producto .card-title {
+    font-weight: bold;
+    text-shadow: 1px 1px 5px rgba(0,0,0,0.7); /* Sombra al texto para mejorar legibilidad */
+}
+
+
+/* =============================================================== */
+/* EFECTO HOVER (AL PASAR EL MOUSE)                                */
+/* =============================================================== */
+.card-producto:hover {
+    transform: translateY(-10px); /* La tarjeta se eleva un poco */
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2); /* La sombra se hace más pronunciada */
+}
+
+.card-producto:hover .card-img {
+    transform: scale(1.1); /* La imagen de fondo hace un ligero zoom */
+}
