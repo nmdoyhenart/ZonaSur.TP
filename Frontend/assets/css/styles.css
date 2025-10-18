@@ -82,3 +82,78 @@ body {
     font-size: 1.1rem;
     text-align: center;
 }
+
+/* =============================================================== */
+/* SECCIÓN TRAYECTORIA                                             */
+/* =============================================================== */
+
+/* Sombra sutil para el auto, como en la referencia */
+.custom-shadow-car {
+    filter: drop-shadow(0 0 1rem rgba(0, 0, 0, 0.1));
+}
+
+/* Tamaño para los íconos de las estadísticas */
+.icon-lg {
+    width: 60px; /* Tamaño más grande para los íconos */
+    height: 60px;
+    filter: invert(15%); /* Oscurecemos un poco los íconos si son blancos */
+}
+
+/* Ajustes de tipografía para un look más limpio */
+#trayectoria h2 {
+    font-weight: 300; /* Más delgado */
+}
+
+#trayectoria .lead {
+    font-size: 1.1rem; /* Un poco más grande y legible */
+    line-height: 1.8; /* Espaciado entre líneas para mejor lectura */
+    color: #555; /* Un gris suave para el texto principal */
+}
+
+#trayectoria .h4 {
+    font-weight: bold;
+    color: #333; /* Un gris oscuro para los números */
+}
+
+#trayectoria .text-muted {
+    font-size: 0.9rem; /* Más pequeño para las etiquetas */
+}
+
+/* =============================================================== */
+/* ANIMACIONES DE SECCIÓN TRAYECTORIA                           */
+/* =============================================================== */
+
+/* Estado inicial para el auto (fuera de la pantalla a la izquierda e invisible) */
+.animate-slide-in {
+    opacity: 0;
+    transform: translateX(-100px);
+    transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+}
+
+/* Estado inicial para el texto (invisible y ligeramente desplazado) */
+.animate-fade-in {
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+    /* Retrasamos la animación del texto para que empiece después del auto */
+    transition-delay: 0.4s; 
+}
+
+/* Estado final y visible que se aplicará con JavaScript */
+.is-visible {
+    opacity: 1;
+    transform: none; /* Resetea la posición a la original */
+}
+
+/* styles.css */
+
+/* Estilos específicos para el botón "Ver Stock" */
+#verMasBtn {
+    /* Si Bootstrap no aplica el redondeo completamente, puedes forzarlo */
+    border-radius: 50px; 
+    /* Si quieres un ancho fijo o un color diferente */
+    /* width: 200px; */
+    /* background-color: #000; */
+    /* color: #fff; */
+    /* border: none; */
+}

@@ -59,6 +59,26 @@
       "color": "Dorado",
       "precio": 90000,
       "imagen": "img/toyota crown.jpg"
+    },
+    {
+      "id": 7,
+      "modelo": "Volkswagen Golf GTI",
+      "año": 2021,
+      "kilometraje": 50000,
+      "transmision": "Automática",
+      "color": "Blanco",
+      "precio": 40000,
+      "imagen": "img/golf gti.jpg"
+    },
+    {
+      "id": 8,
+      "modelo": "Renault Twingo",
+      "año": 2003,
+      "kilometraje": 230000,
+      "transmision": "Manual",
+      "color": "Verde",
+      "precio": 6000,
+      "imagen": "img/twingo.jpg"
     }
   ]
 }
