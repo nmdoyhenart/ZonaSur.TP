@@ -8,7 +8,7 @@
       "transmision": "Automática",
       "color": "Negro",
       "precio": 68000,
-      "imagen": "img/mercedes c class.jpg"
+      "imagen": "../img/mercedes c class.jpg"
     },
     {
       "id": 2,
@@ -18,7 +18,7 @@
       "transmision": "Automática",
       "color": "Azul",
       "precio": 120000,
-      "imagen": "img/bmw-3-series.jpg"
+      "imagen": "../img/bmw-3-series.jpg"
     },
     {
       "id": 3,
@@ -28,7 +28,7 @@
       "transmision": "Automática",
       "color": "Naranja",
       "precio": 120000,
-      "imagen": "img/f150.jpg"
+      "imagen": "../img/f150.jpg"
     },
     {
       "id": 4,
@@ -38,7 +38,7 @@
       "transmision": "Manual",
       "color": "Blanco",
       "precio": 25700,
-      "imagen": "img/corolla.jpg"
+      "imagen": "../img/corolla.jpg"
     },
     {
       "id": 5,
@@ -48,7 +48,7 @@
       "transmision": "Manual",
       "color": "Gris",
       "precio": 20000,
-      "imagen": "img/fiat-cronos-2025.jpg"
+      "imagen": "../img/fiat-cronos-2025.jpg"
     },
     {
       "id": 6,
@@ -58,7 +58,7 @@
       "transmision": "Automática",
       "color": "Dorado",
       "precio": 90000,
-      "imagen": "img/toyota crown.jpg"
+      "imagen": "../img/toyota crown.jpg"
     },
     {
       "id": 7,
@@ -68,7 +68,7 @@
       "transmision": "Automática",
       "color": "Blanco",
       "precio": 40000,
-      "imagen": "img/golf gti.jpg"
+      "imagen": "../img/golf gti.jpg"
     },
     {
       "id": 8,
@@ -78,7 +78,7 @@
       "transmision": "Manual",
       "color": "Verde",
       "precio": 6000,
-      "imagen": "img/twingo.jpg"
+      "imagen": "../img/twingo.jpg"
     }
   ]
 }

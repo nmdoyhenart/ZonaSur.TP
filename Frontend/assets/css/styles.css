@@ -27,7 +27,10 @@ body {
 }
 
 .card-producto .card-img-top {
-    border-radius: 0;
+    width: 100%;       
+    height: 250px;      
+    object-fit: cover;  
+    border-radius: 0; 
 }
 
 /* =============================================================== */
@@ -150,10 +153,37 @@ body {
 /* Estilos específicos para el botón "Ver Stock" */
 #verMasBtn {
     /* Si Bootstrap no aplica el redondeo completamente, puedes forzarlo */
-    border-radius: 50px; 
+    border-radius: 70px; 
     /* Si quieres un ancho fijo o un color diferente */
     /* width: 200px; */
     /* background-color: #000; */
     /* color: #fff; */
     /* border: none; */
+}
+
+.icon-lg {
+    font-size: 2rem;  /* ✅ Usamos font-size para controlar el tamaño. Puedes ajustar este valor. */
+    color: #333;       /* ✅ Usamos color para definir el tono del ícono. */
+}
+
+/* =============================================================== */
+/* PÁGINA DE DETALLE DE PRODUCTO                                   */
+/* =============================================================== */
+
+.producto-hero-section {
+    height: 70vh; /* Altura del 70% de la ventana */
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    display: flex;
+    align-items: flex-end; /* Alinea el contenido abajo */
+    padding: 2rem;
+}
+
+#producto-specs .list-group-item {
+    border-bottom: 1px solid #eee !important;
+    border-top: none;
+    border-left: none;
+    border-right: none;
+    padding: 1rem 0;
 }
