@@ -187,3 +187,179 @@ body {
     border-right: none;
     padding: 1rem 0;
 }
+
+/* Enlaza la fuente Montserrat que usas en tu CSS principal. 
+   Esto debe ir en el <head> de tu HTML, no en el CSS. */
+/* @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&display=swap'); */
+
+/* =============================================================== */
+/* ESTILOS DE BASE (COHERENCIA CON TU styles.css) */
+/* =============================================================== */
+body {
+    font-family: 'Montserrat', sans-serif;
+    background-color: #f8f9fa; /* Fondo de tu body */
+    margin: 0;
+    padding: 0;
+    line-height: 1.6;
+}
+
+/* --- Estilos del Header (Barra de Navegación) --- */
+.header-nav {
+    /* Usamos tu color de fondo negro de .bg-black */
+    background-color: #000 !important; 
+    color: #fff;
+    padding: 15px 50px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.header-logo a {
+    color: #63d661; /* Color verde/azul que se ve en tu logo */
+    font-weight: 700;
+    font-size: 1.5em;
+    text-decoration: none;
+}
+.header-nav-menu a {
+    color: #fff;
+    margin-left: 20px;
+    text-decoration: none;
+    font-weight: 500;
+}
+.header-auth button {
+    /* Botones del header */
+    background-color: #4A90E2; /* Color de acento azul */
+    color: #fff;
+    border: none;
+    padding: 8px 15px;
+    border-radius: 4px;
+    cursor: pointer;
+    margin-left: 10px;
+    font-weight: 600;
+}
+
+/* --- Título de la Página --- */
+.registro-titulo {
+    font-weight: 700; 
+    text-align: center;
+    margin-top: 50px;
+    margin-bottom: 30px;
+    font-size: 2.5rem;
+    color: #212529; 
+    text-transform: uppercase;
+}
+
+
+/* =============================================================== */
+/* CONTENEDOR Y FORMULARIO DE REGISTRO */
+/* =============================================================== */
+
+.contenedor-formulario { 
+    max-width: 480px; 
+    margin: 0 auto 50px auto; 
+    padding: 30px; 
+    border: 1px solid #e9ecef; 
+    border-radius: 4px; 
+    background-color: white; 
+    box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.05); 
+}
+
+/* Inputs de formulario */
+.contenedor-formulario input {
+    width: 100%;
+    padding: 12px;
+    margin-top: 5px;
+    margin-bottom: 15px;
+    border: 1px solid #ced4da; 
+    border-radius: 4px;
+    box-sizing: border-box;
+    transition: border-color 0.2s, box-shadow 0.2s;
+    font-family: 'Montserrat', sans-serif;
+}
+.contenedor-formulario input:focus {
+    border-color: #4A90E2; /* Azul de acento */
+    box-shadow: 0 0 0 0.2rem rgba(74, 144, 226, 0.25); 
+    outline: none;
+}
+
+/* Labels */
+.contenedor-formulario label {
+    display: block;
+    margin-top: 10px;
+    font-weight: 600;
+    color: #343a40;
+    font-size: 0.9rem;
+}
+
+
+/* =============================================================== */
+/* BOTONES DE ACCIÓN (REGISTRAR Y BORRAR) */
+/* =============================================================== */
+
+.acciones {
+    margin-top: 25px;
+    display: flex;
+    justify-content: space-between; 
+}
+
+.acciones button { 
+    flex-grow: 1; 
+    padding: 12px; 
+    margin: 0 5px; 
+    border: none; 
+    border-radius: 4px; 
+    cursor: pointer; 
+    font-weight: 600;
+    transition: background-color 0.2s;
+    font-family: 'Montserrat', sans-serif;
+}
+
+#btnRegistrar { 
+    background-color: #4A90E2; 
+    color: white; 
+}
+#btnRegistrar:hover { 
+    background-color: #3b74b6; 
+}
+
+#btnBorrar { 
+    background-color: #adb5bd; 
+    color: #343a40; 
+}
+#btnBorrar:hover { 
+    background-color: #9aa3ab; 
+}
+
+
+/* =============================================================== */
+/* FEEDBACK Y MENSAJES */
+/* =============================================================== */
+
+#mensaje { 
+    margin-top: 20px; 
+    padding: 15px; 
+    border-radius: 4px; 
+    font-size: 0.9rem;
+    font-weight: 600;
+}
+
+#mensaje ul {
+    list-style-type: none;
+    padding-left: 0;
+    margin-top: 8px;
+    font-weight: 400;
+}
+#mensaje li {
+    margin-bottom: 4px;
+}
+
+/* Estilos de feedback (Éxito y Error) */
+.mensaje-exito {
+    background-color: #d4edda; 
+    color: #155724; 
+    border: 1px solid #c3e6cb;
+}
+.mensaje-error {
+    background-color: #f8d7da; 
+    color: #721c24; 
+    border: 1px solid #f5c6cb;
+}

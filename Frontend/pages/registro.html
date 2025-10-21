@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Registro de Usuario - Concesionaria</title>
+    
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
+    <link rel="stylesheet" href="styles.css">
+    
+</head>
+<body>
+    <header class="header-nav">
+        <div class="header-logo">
+            <a href="index.html">CarDealerTV</a>
+        </div>
+        <nav class="header-nav-menu">
+            <a href="index.html">HOME</a>
+            <a href="#">COMPRAR</a>
+            <a href="#">CONOCENOS</a>
+            <a href="#">CONTACTO</a>
+        </nav>
+        <div class="header-auth">
+            <button onclick="alert('Funcionalidad de Inicio de Sesión pendiente');">Iniciar Sesión</button>
+        </div>
+    </header>
+
+    <h1 class="registro-titulo">Crea tu cuenta de usuario</h1>
+
+    <div class="contenedor-formulario">
+        
+        <form id="formularioRegistro">
+            <label for="regNombre">Nombre:</label>
+            <input type="text" id="regNombre" required>
+            
+            <label for="regApellido">Apellido:</label>
+            <input type="text" id="regApellido" required>
+            
+            <label for="regEmail">Email (Solo Gmail):</label>
+            <input type="email" id="regEmail" required placeholder="usuario@gmail.com">
+            
+            <label for="regFechaNac">Fecha de Nacimiento:</label>
+            <input type="date" id="regFechaNac" required>
+            
+            <label for="regContrasena">Contraseña (Mín. 8 caracteres):</label>
+            <input type="password" id="regContrasena" required minlength="8">
+            
+            <label for="regConfirmarContrasena">Confirmar Contraseña:</label>
+            <input type="password" id="regConfirmarContrasena" required>
+            
+            <div class="acciones">
+                <button type="submit" id="btnRegistrar">Registrarse Provisoriamente</button>
+                <button type="button" id="btnBorrar">Borrar Datos</button>
+            </div>
+        </form>
+        
+        <div id="mensaje"></div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const formulario = document.getElementById('formularioRegistro');
+            const btnBorrar = document.getElementById('btnBorrar');
+            const mensajeDiv = document.getElementById('mensaje');
+
+            // --- Lógica del botón Borrar Datos ---
+            btnBorrar.addEventListener('click', () => {
+                formulario.reset(); 
+                mensajeDiv.textContent = 'Formulario limpiado.';
+                // Limpiamos las clases de feedback
+                mensajeDiv.classList.remove('mensaje-error', 'mensaje-exito'); 
+                mensajeDiv.style.backgroundColor = '#e9ecef';
+                mensajeDiv.style.color = '#000';
+            });
+
+            // --- Lógica del botón Registrarse Provisoriamente ---
+            formulario.addEventListener('submit', function(e) {
+                e.preventDefault(); 
+                mensajeDiv.textContent = ''; 
+                mensajeDiv.classList.remove('mensaje-error', 'mensaje-exito');
+
+                // 1. Obtener valores
+                const email = document.getElementById('regEmail').value.trim();
+                const contrasena = document.getElementById('regContrasena').value;
+                const confirmarContrasena = document.getElementById('regConfirmarContrasena').value;
+                const fechaNacimiento = document.getElementById('regFechaNac').value;
+                
+                let errores = [];
+
+                // 2. Validación: Contraseñas Coincidentes
+                if (contrasena !== confirmarContrasena) {
+                    errores.push('Las contraseñas no coinciden.');
+                }
+
+                // 3. Validación: Email (Formato y Gmail)
+                if (!email.match(/^[^\s@]+@[^\s@]+\.[^\s@]+$/) || !email.endsWith('@gmail.com')) {
+                    errores.push('El email debe ser válido y solo aceptamos cuentas de Gmail.');
+                }
+                
+                // 4. Validación: Longitud de Contraseña
+                if (contrasena.length < 8) {
+                    errores.push('La contraseña debe tener al menos 8 caracteres.');
+                }
+
+                // 5. Validación: Edad Mínima (Mayor de 16 años)
+                if (fechaNacimiento) {
+                    const hoy = new Date();
+                    const fechaNac = new Date(fechaNacimiento);
+                    const edad = hoy.getFullYear() - fechaNac.getFullYear();
+                    const mes = hoy.getMonth() - fechaNac.getMonth();
+                    
+                    if (mes < 0 || (mes === 0 && hoy.getDate() < fechaNac.getDate())) {
+                        edad--;
+                    }
+
+                    if (edad < 16) {
+                        errores.push('Debes ser mayor de 16 años para registrarte.');
+                    }
+                }
+
+                // --- Resultado de la Simulación de Registro ---
+                if (errores.length > 0) {
+                    // Mostrar errores
+                    mensajeDiv.classList.add('mensaje-error');
+                    mensajeDiv.innerHTML = '<p>¡Error en el registro! Revisa los siguientes puntos:</p><ul>' + errores.map(e => `<li>${e}</li>`).join('') + '</ul>';
+                } else {
+                    // Simulación de éxito
+                    const datos = {
+                        nombre: document.getElementById('regNombre').value,
+                        apellido: document.getElementById('regApellido').value,
+                        email: email,
+                        fecha_nacimiento: fechaNacimiento,
+                    };
+                    
+                    console.log('✅ REGISTRO PROVISORIO EXITOSO. Datos Recopilados:', datos);
+                    
+                    mensajeDiv.classList.add('mensaje-exito');
+                    mensajeDiv.textContent = '¡Registro Provisorio Exitoso! Puedes avanzar. (Datos guardados temporalmente en consola)';
+
+                    // Limpiar el formulario después del registro simulado
+                    formulario.reset();
+                }
+            });
+        });
+    </script>
+</body>
+</html>
