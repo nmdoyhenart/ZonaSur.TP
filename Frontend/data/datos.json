@@ -79,6 +79,47 @@
       "color": "Verde",
       "precio": 6000,
       "imagen": "../img/twingo.jpg"
+    },
+    {
+      "id": 9,
+      "modelo": "Volkswagen Scirocco",
+      "año": 2020,
+      "kilometraje":50000,
+      "transmision":"Automática",
+      "color": "Negro",
+      "precio":40000,
+      "imagen": "../img/scirocco.jpg"
+    },
+    {
+      "id": 10,
+      "modelo": "Mercedes-Benz Clase GLC 3.0",
+      "año": 2018,
+      "kilometraje": 60000,
+      "transmision": "Automática",
+      "color": "Blanco",
+      "precio": 70000,
+      "imagen": "../img/Mercedes-Benz Clase GLC 3.0.jpg"
+    },
+    {
+      "id":11,
+      "modelo": "Lamborghini Urus",
+      "año": 2025,
+      "kilometraje": 0,
+      "transmision": "Automática",
+      "color": "Violeta",
+      "precio": 700000,
+      "imagen": "../img/lambo-urus.jpg"
+    },
+    {
+      "id":12,
+      "modelo": "Ferrari 812 Competizione",
+      "año": 2025,
+      "kilometraje": 0,
+      "transmision":"Automática",
+      "color": "Azul",
+      "precio":1600000,
+      "imagen":"../img/ferrari812.jpg"
     }
+
   ]
 }
