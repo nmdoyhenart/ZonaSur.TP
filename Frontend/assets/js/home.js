@@ -1,20 +1,23 @@
 document.addEventListener('DOMContentLoaded', () => {
-    const url = '../data/datos.json';
+    const url = 'http://localhost:4000/api/autos';
     const stockContainer = document.getElementById('compra');
     const autosPorDefecto = 6;
     let todosLosAutos = [];
 
     fetch(url)
         .then(response => {
-            if (!response.ok) throw new Error('Hubo un problema al cargar los datos.');
-            return response.json();
+            if (!response.ok) {
+                throw new Error('Respuesta de red no fue ok al obtener autos');
+            }
+            return response.json(); 
         })
         .then(data => {
-            todosLosAutos = data.autos;
+
+            todosLosAutos = data;
             actualizarVista(todosLosAutos, stockContainer, autosPorDefecto, true);
         })
         .catch(error => {
-            console.error('Error en la operación de fetch:', error);
+            console.error('Error al obtener los autos desde la API:', error);
             stockContainer.innerHTML = '<p class="text-center">No se pudieron cargar los vehículos.</p>';
         });
     
@@ -49,31 +52,32 @@ function actualizarVista(autos, contenedor, cantidadAMostrar, mostrarMas) {
     renderizarBoton(autos, contenedor, cantidadAMostrar, mostrarMas);
 }
 
-
 function renderizarTarjetas(autos, contenedor, cantidad) {
     contenedor.innerHTML = '';
     const autosAMostrar = autos.slice(0, cantidad);
 
     autosAMostrar.forEach(auto => {
+        console.log('Inspeccionando auto:', auto);
+
         const cardColumn = document.createElement('div');
         cardColumn.className = 'col-lg-4 col-md-6 mb-4';
         cardColumn.innerHTML = `
-            <div class="card card-producto">
-                <div class="card-img-wrapper">
-                    <img src="${auto.imagen}" class="card-img-top" alt="Imagen de ${auto.modelo}">
-                    <div class="card-details-overlay">
-                        <ul>
-                            <li>Año/Modelo: ${auto.año}</li>
-                            <li>Kilometraje: ${auto.kilometraje.toLocaleString('es-AR')}km</li>
-                            <li>Transmisión: ${auto.transmision}</li>
-                        </ul>
-                    </div>
+        <div class="card card-producto">
+            <div class="card-img-wrapper">
+                <img src="${auto.imagenes[0]}" class="card-img-top" alt="Imagen de ${auto.modelo}">
+                <div class="card-details-overlay">
+                    <ul>
+                        <li>Año/Modelo: ${auto.año}</li>
+                        <li>Kilometraje: ${auto.kilometraje.toLocaleString('es-AR')} km</li>
+                        <li>Transmisión: ${auto.transmision}</li>
+                    </ul>
                 </div>
-                <div class="card-body">
-                    <h5 class="card-title" text-center>${auto.modelo}</h5>
-                </div>
-                <a href="productos.html" class="stretched-link"></a>
             </div>
+            <div class="card-body">
+                <h5 class="card-title text-center">${auto.modelo}</h5>
+            </div>
+            <a href="producto.html?id=${auto._id}" class="stretched-link"></a>
+        </div>
         `;
         contenedor.appendChild(cardColumn);
     });

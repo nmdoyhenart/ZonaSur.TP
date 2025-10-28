@@ -1,17 +1,36 @@
+/* =============================================================== */
+/* 1. ESTILOS GENERALES Y BASE                                     */
+/* =============================================================== */
+
 body {
     font-family: 'Montserrat', sans-serif;
     background-color: #f8f9fa;
+    margin: 0;
+    padding: 0;
+    line-height: 1.6;
 }
 
 .bg-black {
     background-color: #000 !important;
 }
 
+/* =============================================================== */
+/* 2. COMPONENTES REUTILIZABLES                                    */
+/* =============================================================== */
+
+/* --- 2.1. Tarjetas de Producto --- */
 .card-producto {
     border: 1px solid #ddd; 
     border-radius: 0; 
-    box-shadow: none;      
+    box-shadow: none;
     transition: all 0.2s ease-in-out;
+}
+
+.card-producto .card-img-top {
+    width: 100%;
+    height: 250px;
+    object-fit: cover;
+    border-radius: 0; 
 }
 
 .card-producto .card-body {
@@ -21,21 +40,12 @@ body {
 }
 
 .card-producto .card-title {
-    font-size: 1rem;      
-    font-weight: normal;  
-    margin-bottom: 0;     
+    font-size: 1rem;
+    font-weight: normal;
+    margin-bottom: 0;
 }
 
-.card-producto .card-img-top {
-    width: 100%;       
-    height: 250px;      
-    object-fit: cover;  
-    border-radius: 0; 
-}
-
-/* =============================================================== */
-/* EFECTO HOVER                                                    */
-/* =============================================================== */
+/* --- 2.2. Efectos Hover para Tarjetas --- */
 .card-producto:hover {
     transform: translateY(-10px); 
     box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2); 
@@ -45,10 +55,6 @@ body {
 .card-producto:hover .card-img {
     transform: scale(1.1); 
 }
-
-/* =============================================================== */
-/* ESTILOS PARA EL OVERLAY DE DETALLES EN HOVER                    */
-/* =============================================================== */
 
 .card-img-wrapper {
     position: relative;
@@ -63,19 +69,15 @@ body {
     height: 100%;
     background-color: rgba(0, 0, 0, 0.7);
     color: #fff; 
-    
-    /* Centramos el contenido (la lista) */
     display: flex;
     justify-content: center;
     align-items: center;
-
-    /* Efecto de transición suave */
     opacity: 0;
     transition: opacity 0.3s ease-in-out;
 }
 
 .card-producto:hover .card-details-overlay {
-    opacity: 1; /* Lo mostramos */
+    opacity: 1;
 }
 
 .card-details-overlay ul {
@@ -86,97 +88,157 @@ body {
     text-align: center;
 }
 
+/* --- 2.3. Formularios (Login, Registro, Venta) --- */
+.registro-titulo {
+    font-weight: 700; 
+    text-align: center;
+    margin-top: 50px;
+    margin-bottom: 30px;
+    font-size: 2.5rem;
+    color: #212529;
+    text-transform: uppercase;
+}
+
+.contenedor-formulario { 
+    max-width: 480px; 
+    margin: 0 auto 50px auto; 
+    padding: 30px; 
+    border: 1px solid #e9ecef;
+    border-radius: 4px; 
+    background-color: white; 
+    box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.05); 
+}
+
+.contenedor-formulario label {
+    display: block;
+    margin-top: 10px;
+    font-weight: 600;
+    color: #343a40;
+    font-size: 0.9rem;
+}
+
+.contenedor-formulario input {
+    width: 100%;
+    padding: 12px;
+    margin-top: 5px;
+    margin-bottom: 15px;
+    border: 1px solid #ced4da; 
+    border-radius: 4px;
+    box-sizing: border-box;
+    transition: border-color 0.2s, box-shadow 0.2s;
+    font-family: 'Montserrat', sans-serif;
+}
+
+.contenedor-formulario input:focus {
+    border-color: #4A90E2;
+    box-shadow: 0 0 0 0.2rem rgba(74, 144, 226, 0.25); 
+    outline: none;
+}
+
+.acciones {
+    margin-top: 25px;
+    display: flex;
+    justify-content: space-between; 
+}
+
+.acciones .btn, .acciones button {
+    flex-grow: 1;
+    margin: 0 5px; 
+    font-weight: 600;
+    padding: 12px;
+}
+
+/* --- 2.4. Mensajes de Feedback (Error/Éxito) --- */
+#mensaje { 
+    margin-top: 20px; 
+    padding: 15px; 
+    border-radius: 4px; 
+    font-size: 1.1rem;
+    font-weight: 600;
+}
+
+#mensaje ul {
+    list-style-type: none;
+    padding-left: 0;
+    margin-top: 8px;
+    font-weight: 400;
+}
+#mensaje li {
+   margin-bottom: 4px;
+}
+
+.mensaje-exito {
+    background-color: #d4edda;
+    color: #155724; 
+    border: 1px solid #c3e6cb;
+}
+
+.mensaje-error {
+    background-color: #f8d7da;
+    color: #721c24; 
+    border: 1px solid #f5c6cb;
+}
+
 /* =============================================================== */
-/* SECCIÓN TRAYECTORIA                                             */
+/* 3. ESTILOS ESPECÍFICOS POR SECCIÓN / PÁGINA                     */
 /* =============================================================== */
 
-/* Sombra sutil para el auto, como en la referencia */
+/* --- 3.1. Sección Trayectoria (Home) --- */
 .custom-shadow-car {
     filter: drop-shadow(0 0 1rem rgba(0, 0, 0, 0.1));
 }
 
-/* Tamaño para los íconos de las estadísticas */
 .icon-lg {
-    width: 60px; /* Tamaño más grande para los íconos */
-    height: 60px;
-    filter: invert(15%); /* Oscurecemos un poco los íconos si son blancos */
+    font-size: 3rem;
+    color: #333;
 }
 
-/* Ajustes de tipografía para un look más limpio */
 #trayectoria h2 {
-    font-weight: 300; /* Más delgado */
+    font-weight: 300;
 }
 
 #trayectoria .lead {
-    font-size: 1.1rem; /* Un poco más grande y legible */
-    line-height: 1.8; /* Espaciado entre líneas para mejor lectura */
-    color: #555; /* Un gris suave para el texto principal */
+    font-size: 1.1rem;
+    line-height: 1.8;
+    color: #555;
 }
 
 #trayectoria .h4 {
     font-weight: bold;
-    color: #333; /* Un gris oscuro para los números */
+    color: #333;
 }
 
 #trayectoria .text-muted {
-    font-size: 0.9rem; /* Más pequeño para las etiquetas */
+    font-size: 0.9rem;
 }
 
-/* =============================================================== */
-/* ANIMACIONES DE SECCIÓN TRAYECTORIA                           */
-/* =============================================================== */
-
-/* Estado inicial para el auto (fuera de la pantalla a la izquierda e invisible) */
+/* --- 3.2. Animaciones (Trayectoria) --- */
 .animate-slide-in {
     opacity: 0;
     transform: translateX(-100px);
     transition: opacity 0.8s ease-out, transform 0.8s ease-out;
 }
 
-/* Estado inicial para el texto (invisible y ligeramente desplazado) */
 .animate-fade-in {
     opacity: 0;
     transform: translateY(20px);
     transition: opacity 0.8s ease-out, transform 0.8s ease-out;
-    /* Retrasamos la animación del texto para que empiece después del auto */
     transition-delay: 0.4s; 
 }
 
-/* Estado final y visible que se aplicará con JavaScript */
 .is-visible {
     opacity: 1;
-    transform: none; /* Resetea la posición a la original */
+    transform: none;
 }
 
-/* styles.css */
-
-/* Estilos específicos para el botón "Ver Stock" */
-#verMasBtn {
-    /* Si Bootstrap no aplica el redondeo completamente, puedes forzarlo */
-    border-radius: 70px; 
-    /* Si quieres un ancho fijo o un color diferente */
-    /* width: 200px; */
-    /* background-color: #000; */
-    /* color: #fff; */
-    /* border: none; */
-}
-
-.icon-lg {
-    font-size: 2rem;  /* ✅ Usamos font-size para controlar el tamaño. Puedes ajustar este valor. */
-    color: #333;       /* ✅ Usamos color para definir el tono del ícono. */
-}
-
-/* =============================================================== */
-/* PÁGINA DE DETALLE DE PRODUCTO                                   */
-/* =============================================================== */
-
+/* --- 3.3. Página de Producto --- */
 .producto-hero-section {
-    height: 70vh; /* Altura del 70% de la ventana */
+    height: 70vh;
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
     display: flex;
-    align-items: flex-end; /* Alinea el contenido abajo */
+    align-items: flex-end;
     padding: 2rem;
 }
 
@@ -186,4 +248,109 @@ body {
     border-left: none;
     border-right: none;
     padding: 1rem 0;
+}
+
+#producto-galeria {
+    border-radius: 0.5rem;
+    overflow: hidden;
+    border: 1px solid #eee;
+}
+
+#producto-galeria .carousel-item img {
+    height: 350px;
+    object-fit: cover;
+    width: 100%;
+}
+
+.gallery-wrapper {
+    text-align: center;
+}
+
+#reservar-btn {
+    margin-top: 1rem;
+    border-radius: 5px;
+    border-width: 2px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    transition: all 0.3s ease;
+}
+
+#reservar-btn:hover {
+    background-color: #212529;
+    color: #fff;
+    border-color: #212529;
+}
+
+/* --- 3.4. Página del Carrito --- */
+#cart-container .card img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+/* --- 3.5. Página de Venta --- */
+#image-upload-container {
+    border: 2px dashed #ddd;
+    border-radius: 5px;
+    padding: 20px;
+    text-align: center;
+}
+
+.upload-label {
+    cursor: pointer;
+    background-color: #f8f9fa;
+    color: #333;
+    padding: 10px 20px;
+    border-radius: 5px;
+    border: 1px solid #ddd;
+    display: inline-block;
+    margin-top: 10px;
+}
+
+.upload-label:hover {
+    background-color: #e9ecef;
+}
+
+#image-preview-container {
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+    justify-content: center;
+    margin-bottom: 15px;
+}
+
+.img-preview-wrapper {
+    position: relative;
+    width: 120px;
+    height: 90px;
+    border-radius: 5px;
+    overflow: hidden;
+    cursor: grab;
+}
+
+.img-preview {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.remove-img-btn {
+    position: absolute;
+    top: 5px;
+    right: 5px;
+    background-color: rgba(0, 0, 0, 0.6);
+    color: white;
+    border: none;
+    border-radius: 50%;
+    width: 20px;
+    height: 20px;
+    line-height: 20px;
+    text-align: center;
+    cursor: pointer;
+    font-size: 12px;
+}
+
+.dragging {
+    opacity: 0.5;
 }
