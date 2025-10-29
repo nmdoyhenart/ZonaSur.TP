@@ -10,7 +10,6 @@ const adminData = {
     nombre: 'Administrador',
     username: 'administrador',
     password: 'admin1234',
-    //email: 'admin@zonasurcars.com',
     isAdmin: true
 };
 
@@ -33,7 +32,6 @@ const crearAdmin = async () => {
             nombre: adminData.nombre,
             username: adminData.username,
             password: hashedPassword,
-            //email: adminData.email,
             isAdmin: adminData.isAdmin
         });
 

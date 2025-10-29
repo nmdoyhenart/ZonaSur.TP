@@ -354,3 +354,110 @@ body {
 .dragging {
     opacity: 0.5;
 }
+
+/* =============================================================== */
+/* ESTILOS PARA EL DASHBOARD DE ADMINISTRADOR                      */
+/* =============================================================== */
+
+/* Estilo de las pestañas */
+.nav-tabs .nav-link {
+    color: #495057; /* Color de texto grisáceo */
+    border: none;
+    border-bottom: 3px solid transparent;
+    margin: 0 5px;
+    padding: 10px 20px;
+    font-weight: 600;
+}
+
+.nav-tabs .nav-link.active,
+.nav-tabs .nav-link:hover {
+    color: #212529; /* Color oscuro al activar/hover */
+    border-color: #4A90E2; /* Usamos tu color de acento azul */
+    background-color: transparent;
+}
+
+/* Contenedor principal del contenido de las pestañas */
+.tab-content {
+    margin-top: 30px;
+}
+
+.dashboard-container {
+    max-width: 90%; /* O un valor fijo más grande, ej: 1140px */
+    margin: 0 auto 50px auto; 
+    margin-bottom: 30px;
+    padding: 20px; 
+    border: 1px solid #e9ecef; 
+    border-radius: 4px; 
+    background-color: white; 
+    box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.05); 
+}
+
+/* Ajustes finos para el formulario de añadir usuario */
+#add-user-form .form-check {
+    padding-top: 0.5rem; /* Ajusta este valor para alinear verticalmente el checkbox si es necesario */
+}
+
+#add-user-form .form-check-label {
+    white-space: nowrap; /* Evita que "Es Administrador" se parta en dos líneas */
+}
+
+#add-user-form .col-md-1 button {
+    padding-left: 0.5rem; /* Reduce padding si el texto del botón se corta */
+    padding-right: 0.5rem;
+}
+
+/* Contenedor específico para la tarjeta de usuarios en el dashboard */
+#usuarios-card-container {
+    /* Aseguramos que la altura sea automática */
+    height: auto; 
+    min-height: unset; /* Quitamos cualquier altura mínima heredada */
+
+    /* Ajustamos el padding (prueba reducir el padding-bottom) */
+    padding: 20px; 
+    padding-bottom: 20px; /* Reduce este valor si hay mucho espacio abajo */
+
+    /* Mantenemos otros estilos si usabas .dashboard-container */
+    max-width: 90%; 
+    margin: 0 auto 30px auto; /* Reducimos margen inferior */
+    border: 1px solid #e9ecef; 
+    border-radius: 4px; 
+    background-color: white; 
+    box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.05); 
+}
+
+/* Opcional: Quitar margen inferior del div que contiene la tabla */
+#usuarios-content .table-responsive {
+    margin-bottom: 0; 
+}
+
+/* Reutilizamos/Añadimos estilos para el upload del dashboard */
+#auto-image-upload-container { /* Puedes combinar con #image-upload-container si son iguales */
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    padding: 15px;
+}
+
+#auto-image-preview-container { /* Combinar con #image-preview-container */
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+    justify-content: flex-start; /* Alinea a la izquierda */
+    margin-bottom: 15px;
+    min-height: 90px; /* Evita que colapse si no hay imágenes */
+}
+
+/* Estas clases pueden ser las mismas que en vender.html */
+.img-preview-wrapper { 
+    position: relative;
+    width: 120px;
+    height: 90px;
+    border-radius: 5px;
+    overflow: hidden;
+    cursor: grab;
+    border: 1px solid #eee;
+}
+.img-preview {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}

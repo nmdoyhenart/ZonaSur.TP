@@ -11,68 +11,172 @@
     <link rel="stylesheet" href="../assets/css/styles.css">
 </head>
 <body>
+
     <header>
         <nav class="navbar navbar-expand-lg navbar-dark bg-black">
             <div class="container">
-                <a class="navbar-brand" href="bienvenida.html">
-                    <img src="../img/zsnavbar.png" alt="Logo Concesionaria Zonasur Cars" height="40" class="d-inline-block align-text-top logo-navbar">
+                <a class="navbar-brand" href="dashboard.html">
+                    <img src="../img/zsnavbar.png" alt="Logo Concesionaria Zonasur Cars" height="40">
                 </a>
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-                
-                    <div class="d-flex">
-                        <a href="login_adm.html" class="btn btn-outline-light me-2">Inicio sesión admin</a>
-                    </div>
+                <div class="ms-auto">
+                    <button id="logoutBtn" class="btn btn-outline-light">Cerrar Sesión</button>
                 </div>
             </div>
         </nav>
     </header>
 
     <main class="container my-5">
-        <h1 class="registro-titulo mb-4">Panel de Administración</h1>
-
-        <div class="row g-4">
-            <div class="col-md-12">
-                <div class="card contenedor-formulario">
-                    <div class="card-body">
-                        <h5 class="card-title">Usuarios Registrados</h5>
-                        <div id="usuarios-container">
-                            <p>Cargando usuarios...</p>
-                            </div>
-                    </div>
-                </div>
-            </div>
-
-            <div class="col-md-12">
-                <div class="card contenedor-formulario">
-                    <div class="card-body">
-                        <h5 class="card-title">Productos (Autos)</h5>
-                         <button class="btn btn-success mb-3">Agregar Nuevo Auto</button>
-                        <div id="productos-container">
-                             <p>Cargando productos...</p>
-                            </div>
-                    </div>
-                </div>
-            </div>
-
-            <div class="col-md-12">
-                <div class="card contenedor-formulario">
-                    <div class="card-body">
-                        <h5 class="card-title">Tickets / Reservas</h5>
-                        <div id="reservas-container">
-                             <p>Cargando reservas...</p>
-                            </div>
-                    </div>
-                </div>
-            </div>
+        <div class="text-center mb-5">
+            <h1 class="registro-titulo mb-1">Panel de Administrador</h1>
+            <p class="text-muted">Gestión de ZonaSur Cars</p>
         </div>
-    </main>
+
+        <ul class="nav nav-tabs justify-content-center mb-4" id="adminTab" role="tablist">
+            <li class="nav-item" role="presentation">
+                <button class="nav-link active" id="usuarios-tab" data-bs-toggle="tab" data-bs-target="#usuarios-panel" type="button" role="tab" aria-controls="usuarios-panel" aria-selected="true"><i class="bi bi-people-fill me-2"></i>Usuarios</button>
+            </li>
+            <li class="nav-item" role="presentation">
+                <button class="nav-link" id="productos-tab" data-bs-toggle="tab" data-bs-target="#productos-panel" type="button" role="tab" aria-controls="productos-panel" aria-selected="false"><i class="bi bi-car-front-fill me-2"></i>Productos</button>
+            </li>
+            <li class="nav-item" role="presentation">
+                <button class="nav-link" id="reservas-tab" data-bs-toggle="tab" data-bs-target="#reservas-panel" type="button" role="tab" aria-controls="reservas-panel" aria-selected="false"><i class="bi bi-calendar-check-fill me-2"></i>Reservas</button>
+            </li>
+            <li class="nav-item" role="presentation">
+                <button class="nav-link" id="estadisticas-tab" data-bs-toggle="tab" data-bs-target="#estadisticas-panel" type="button" role="tab" aria-controls="estadisticas-panel" aria-selected="false"><i class="bi bi-graph-up me-2"></i>Estadísticas</button>
+            </li>
+        </ul>
+
+        <div class="tab-content" id="adminTabContent">
+
+            <div class="tab-pane fade show active" id="usuarios-panel" role="tabpanel" aria-labelledby="usuarios-tab">
+                <div class="card dashboard-container" id="usuarios-card-container">
+                    <div class="card-body">
+                        <h5 class="card-title mb-3">Gestión de Usuarios</h5>
+                        <form id="add-user-form" class="row g-3 mb-4 border p-3 rounded bg-light align-items-end">
+                            <div class="col-md-3">
+                                <label for="addUserName" class="form-label">Nombre</label>
+                                <input type="text" class="form-control" id="addUserName" required>
+                            </div>
+                            <div class="col-md-3">
+                                <label for="addUserUsername" class="form-label">Username (Admin)</label>
+                                <input type="text" class="form-control" id="addUserUsername" placeholder="Requerido si es Admin">
+                            </div>
+                            <div class="col-md-3">
+                                <label for="addUserPassword" class="form-label">Contraseña (Admin)</label>
+                                <input type="password" class="form-control" id="addUserPassword" placeholder="Requerido si es Admin">
+                            </div>
+                            <div class="col-md-2 d-flex align-items-center pt-3">
+                                <div class="form-check ms-2">
+                                    <input class="form-check-input" type="checkbox" id="addUserIsAdminCheck">
+                                    <label class="form-check-label" for="addUserIsAdminCheck">
+                                        Admin
+                                    </label>
+                                </div>
+                            </div>
+                            <div class="col-md-1">
+                                <button type="submit" class="btn btn-success" title="Añadir Usuario"><i class="bi bi-check-lg"></i></button>
+                            </div>
+                            <div class="col-12">
+                                <small class="form-text text-muted">Para Administradores, 'Username' y 'Contraseña' son obligatorios.</small>
+                            </div>
+                        </form>
+                        <div id="usuarios-content">
+                            <p>Cargando usuarios...</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="tab-pane fade" id="productos-panel" role="tabpanel" aria-labelledby="productos-tab">
+            <div class="card dashboard-container">
+                <div class="card-body">
+                    <h5 class="card-title mb-3">Gestión de Productos (Autos)</h5>
+
+                    <form id="auto-form" class="row g-3 mb-4 border p-3 rounded bg-light">
+                        <input type="hidden" id="autoId"> <div class="col-md-4">
+                            <label for="autoModelo" class="form-label">Modelo</label>
+                            <input type="text" class="form-control" id="autoModelo" required>
+                        </div>
+                        <div class="col-md-2">
+                            <label for="autoAño" class="form-label">Año</label>
+                            <input type="number" class="form-control" id="autoAño" required>
+                        </div>
+                        <div class="col-md-3">
+                            <label for="autoKilometraje" class="form-label">Kilometraje</label>
+                            <input type="number" class="form-control" id="autoKilometraje" required>
+                        </div>
+                        <div class="col-md-3">
+                            <label for="autoPrecio" class="form-label">Precio (USD)</label>
+                            <input type="number" class="form-control" id="autoPrecio" required>
+                        </div>
+                        <div class="col-md-4">
+                            <label for="autoTransmision" class="form-label">Transmisión</label>
+                            <select id="autoTransmision" class="form-select" required>
+                                <option selected disabled value="">Elegir...</option>
+                                <option>Automática</option>
+                                <option>Manual</option>
+                            </select>
+                        </div>
+                        <div class="col-md-4">
+                            <label for="autoColor" class="form-label">Color</label>
+                            <input type="text" class="form-control" id="autoColor" required>
+                        </div>
+                        <div class="col-12 mb-3">
+                            <label class="form-label">Imágenes (hasta 4, la primera será la principal)</label>
+                            <div id="auto-image-upload-container">
+                                <div id="auto-image-preview-container" class="mb-2"></div>
+                                
+                                <input type="file" id="autoImageUpload" multiple accept="image/*" class="d-none">
+
+                                <label for="autoImageUpload" class="btn btn-secondary btn-sm">
+                                    <i class="bi bi-upload me-2"></i> Seleccionar Imágenes
+                                </label>
+                                <small class="form-text text-muted ms-2">Puedes reordenar arrastrando.</small>
+                            </div>
+                        </div>
+                        <div class="col-12 d-flex justify-content-end">
+                            <button type="button" id="cancelEditBtn" class="btn btn-secondary me-2 d-none">Cancelar Edición</button>
+                            <button type="submit" id="submitAutoBtn" class="btn btn-primary">Guardar Auto</button>
+                        </div>
+                    </form>
+
+                    <h5 class="card-title mb-3">Listado de Autos</h5>
+                    <div id="productos-content">
+                        <p>Cargando productos...</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            <div class="tab-pane fade" id="reservas-panel" role="tabpanel" aria-labelledby="reservas-tab">
+                <div class="card dashboard-container">
+                    <div class="card-body">
+                        <h5 class="card-title mb-3">Historial de Reservas</h5>
+                        <div id="reservas-content">
+                            <p>Cargando reservas...</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="tab-pane fade" id="estadisticas-panel" role="tabpanel" aria-labelledby="estadisticas-tab">
+                <div class="card dashboard-container">
+                    <div class="card-body">
+                        <h5 class="card-title mb-3">Estadísticas Generales</h5>
+                        <div id="estadisticas-content">
+                            <p>Cargando estadísticas...</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div> </main>
 
     <footer>
-        </footer>
+        <p class="text-center mb-4">Nicolás Doyhenart | Bautista Elena</p>
+    </footer>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="../assets/js/dashboard.js"></script> 
+    <script src="../assets/js/dashboard.js"></script>
 </body>
 </html>

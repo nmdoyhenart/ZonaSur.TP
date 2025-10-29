@@ -35,10 +35,7 @@ document.addEventListener('DOMContentLoaded', () => {
         }
 
         const datosLogin = { 
-            // Necesitaremos ajustar el backend para que acepte 'username'
-            // Por ahora, enviamos el campo como 'email' para que no falle, 
-            // pero el valor será el nombre de usuario.
-            email: username, // Temporalmente enviamos username como email
+            username: username,
             password: contrasena 
         };
         

@@ -3,6 +3,7 @@ const conectarDB = require('./config/db');
 const usuarioRoutes = require('./routes/usuarioRoutes');
 const autoRoutes = require('./routes/autoRoutes');
 const cors = require('cors');
+const path = require('path');
 
 conectarDB();
 const app = express();
@@ -10,6 +11,7 @@ const app = express();
 app.use(cors());
 app.use(express.json());
 
+app.use('/img', express.static(path.join(__dirname, '../Frontend/img')));
 app.use('/api/usuarios', usuarioRoutes);
 app.use('/api/autos', autoRoutes);
 

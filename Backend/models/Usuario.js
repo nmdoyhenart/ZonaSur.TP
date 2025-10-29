@@ -4,10 +4,16 @@ const usuarioSchema = new mongoose.Schema({
     nombre: {
         type: String,
         required: true,
-        sparse: true,
         trim: true
     },
-    contraseña: { 
+
+    username: { 
+        type: String,
+        unique: true,
+        sparse: true, // Permite múltiples null/undefined si no se usa
+        trim: true
+    },
+    password: { 
         type: String 
     },
     isAdmin: {
