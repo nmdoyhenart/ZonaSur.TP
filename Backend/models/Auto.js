@@ -2,7 +2,7 @@ const mongoose = require('mongoose');
 
 const autoSchema = new mongoose.Schema({
     modelo: { type: String, required: true, trim: true },
-    año: { type: Number, required: true },
+    anio: { type: Number, required: true },
     kilometraje: { type: Number, required: true },
     transmision: { type: String, required: true },
     color: { type: String, required: true },

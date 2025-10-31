@@ -355,109 +355,156 @@ body {
     opacity: 0.5;
 }
 
-/* =============================================================== */
-/* ESTILOS PARA EL DASHBOARD DE ADMINISTRADOR                      */
-/* =============================================================== */
-
-/* Estilo de las pestañas */
-.nav-tabs .nav-link {
-    color: #495057; /* Color de texto grisáceo */
-    border: none;
-    border-bottom: 3px solid transparent;
-    margin: 0 5px;
-    padding: 10px 20px;
-    font-weight: 600;
+/* --- 3.6 Estilos por default del modo claro --- */
+body {
+    background-color: #f4f4f4; 
+    color: #333333;
+    transition: background-color 0.3s, color 0.3s;
+}
+a {
+    color: #000000; 
+}
+h1, h2, h3 {
+    color: #111111;
 }
 
-.nav-tabs .nav-link.active,
-.nav-tabs .nav-link:hover {
-    color: #212529; /* Color oscuro al activar/hover */
-    border-color: #4A90E2; /* Usamos tu color de acento azul */
-    background-color: transparent;
+
+/* --- cuando el body cambiar a modo oscuro --- */
+.dark-mode {
+    background-color: #1a1a1a; 
+    color: #f4f4f4;
 }
 
-/* Contenedor principal del contenido de las pestañas */
-.tab-content {
-    margin-top: 30px;
+.dark-mode a {
+    color: #99ccff; 
+}
+.dark-mode h1,
+.dark-mode h2,
+.dark-mode h3 {
+    color: #ffffff; 
 }
 
-.dashboard-container {
-    max-width: 90%; /* O un valor fijo más grande, ej: 1140px */
-    margin: 0 auto 50px auto; 
-    margin-bottom: 30px;
+.dark-mode .texto-secundario {
+    color: #aaaaaa; 
+}
+
+.dark-mode .container {
+    background-color: #1a1a1a !important; 
+}
+.dark-mode .icon-lg { 
+    color: #ffffff !important; 
+}
+
+.dark-mode .text-muted {
+    color: #aaaaaa !important; 
+}
+
+.dark-mode strong {
+    color: #ffffff !important;
+}
+.dark-mode section {
+    background-color: #1a1a1a !important; 
+}
+
+.dark-mode .container-fluid {
+    background-color: #1a1a1a !important; 
+}
+
+.dark-mode .bg-white {
+    background-color: #1a1a1a !important; 
+}
+
+
+.dark-mode .list-group-flush .list-group-item {
+    background-color: #1a1a1a !important;
+    
+    color: #f4f4f4 !important;
+
+    border-color: #444444 !important;
+}
+
+.dark-mode .contenedor-formulario {
+    background-color: #1a1a1a!important; 
+    
     padding: 20px; 
-    border: 1px solid #e9ecef; 
-    border-radius: 4px; 
-    background-color: white; 
-    box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.05); 
+    border-radius: 8px;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.5); 
 }
 
-/* Ajustes finos para el formulario de añadir usuario */
-#add-user-form .form-check {
-    padding-top: 0.5rem; /* Ajusta este valor para alinear verticalmente el checkbox si es necesario */
+body.dark-mode .d-flex {
+    background-color: #1a1a1a !important; 
 }
 
-#add-user-form .form-check-label {
-    white-space: nowrap; /* Evita que "Es Administrador" se parta en dos líneas */
+
+body.dark-mode .btn-secondary {
+    background-color: #1a1a1a !important;
+    border-color: #f4f4f4 !important; 
 }
 
-#add-user-form .col-md-1 button {
-    padding-left: 0.5rem; /* Reduce padding si el texto del botón se corta */
-    padding-right: 0.5rem;
+
+.dark-mode .d-flex {
+    background-color: #2a2a2a !important; 
+    border-radius: 8px;
+    padding: 10px;
 }
 
-/* Contenedor específico para la tarjeta de usuarios en el dashboard */
-#usuarios-card-container {
-    /* Aseguramos que la altura sea automática */
-    height: auto; 
-    min-height: unset; /* Quitamos cualquier altura mínima heredada */
-
-    /* Ajustamos el padding (prueba reducir el padding-bottom) */
-    padding: 20px; 
-    padding-bottom: 20px; /* Reduce este valor si hay mucho espacio abajo */
-
-    /* Mantenemos otros estilos si usabas .dashboard-container */
-    max-width: 90%; 
-    margin: 0 auto 30px auto; /* Reducimos margen inferior */
-    border: 1px solid #e9ecef; 
-    border-radius: 4px; 
-    background-color: white; 
-    box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.05); 
+.dark-mode .resumen-container,
+.dark-mode .card,
+.dark-mode .contenedor-reserva,
+.dark-mode .container-reserva {
+    background-color: #2a2a2a !important; 
+    color: #f4f4f4 !important;            
+    border-color: #444444 !important;    
+    box-shadow: 0 0 10px rgba(255,255,255,0.05); 
 }
 
-/* Opcional: Quitar margen inferior del div que contiene la tabla */
-#usuarios-content .table-responsive {
-    margin-bottom: 0; 
+.dark-mode .resumen-container h5,
+.dark-mode .resumen-container p,
+.dark-mode .resumen-container span,
+.dark-mode .resumen-container strong {
+    color: #f4f4f4 !important;
 }
 
-/* Reutilizamos/Añadimos estilos para el upload del dashboard */
-#auto-image-upload-container { /* Puedes combinar con #image-upload-container si son iguales */
-    border: 1px solid #ddd;
-    border-radius: 5px;
-    padding: 15px;
+.dark-mode .btn-success {
+    background-color: #28a745 !important;
+    color: #fff !important;
+    border-color: #1f7a31 !important;
 }
 
-#auto-image-preview-container { /* Combinar con #image-preview-container */
-    display: flex;
-    gap: 10px;
-    flex-wrap: wrap;
-    justify-content: flex-start; /* Alinea a la izquierda */
-    margin-bottom: 15px;
-    min-height: 90px; /* Evita que colapse si no hay imágenes */
+.dark-mode .btn-success:hover {
+    background-color: #1f7a31 !important;
 }
 
-/* Estas clases pueden ser las mismas que en vender.html */
-.img-preview-wrapper { 
-    position: relative;
-    width: 120px;
-    height: 90px;
-    border-radius: 5px;
-    overflow: hidden;
-    cursor: grab;
-    border: 1px solid #eee;
+
+.dark-mode .registro-titulo {
+    color: #ffffff !important; 
 }
-.img-preview {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
+
+.dark-mode .contenedor-formulario label,
+.dark-mode .contenedor-formulario p,
+.dark-mode .contenedor-formulario small,
+.dark-mode #image-upload-container,
+.dark-mode #image-upload-container p {
+    color: #f4f4f4 !important; 
+}
+
+.dark-mode .contenedor-formulario input,
+.dark-mode .contenedor-formulario textarea {
+    background-color: #333333; 
+    
+    color: #ffffff; 
+    border-color: #555555 !important;
+}
+
+
+.dark-mode .contenedor-formulario input::placeholder,
+.dark-mode .contenedor-formulario textarea::placeholder {
+    color: #aaaaaa; 
+    opacity: 1; 
+}
+
+.dark-mode .upload-label {
+    background-color: #333333; 
+    color: #ffffff; 
+    border-color: #555555;
 }

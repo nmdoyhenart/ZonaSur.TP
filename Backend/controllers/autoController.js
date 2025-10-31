@@ -27,24 +27,25 @@ const obtenerAutoPorId = async (req, res) => {
     }
 };
 
+// --- CREAR AUTO (CORREGIDO) ---
 const crearAuto = async (req, res) => {
-    const { modelo, año, kilometraje, transmision, color, precio } = req.body;
-    
-    const imagenes = req.files.map(file => `/img/${file.filename}`);
+    const { modelo, anio, kilometraje, transmision, color, precio } = req.body;
+
+    const imagenes = req.files.map(file => `${req.protocol}://${req.get('host')}/uploads/${file.filename}`);
 
     try {
-        if (!modelo || !imagenes || imagenes.length === 0) {
+        if (!modelo || !anio || !precio || !imagenes || imagenes.length === 0) {
             return res.status(400).json({ msg: 'Faltan campos obligatorios o imágenes.' });
         }
 
         const nuevoAuto = new Auto({
             modelo,
-            año,
+            anio,
             kilometraje,
             transmision,
             color,
             precio,
-            imagenes
+            imagenes // 3. Guardar el array de URLs públicas
         });
 
         const autoGuardado = await nuevoAuto.save();
@@ -52,41 +53,44 @@ const crearAuto = async (req, res) => {
 
     } catch (error) {
         console.error("Error al crear auto:", error);
-        res.status(500).json({ msg: 'Error en el servidor al añadir el auto.' });
+        res.status(500).json({ msg: `Error en el servidor al añadir el auto: ${error.message}` });
     }
 };
 
+// --- ACTUALIZAR AUTO (CORREGIDO) ---
 const actualizarAuto = async (req, res) => {
     try {
-        const nuevasImagenes = req.files.map(file => `/img/${file.filename}`);
-        
+        // 1. Obtener URLs de imágenes existentes que se quieren conservar
         let imagenesExistentes = [];
         if (req.body.existingImages) {
             imagenesExistentes = JSON.parse(req.body.existingImages);
         }
-        
+
+        // 2. Obtener URLs de las nuevas imágenes subidas
+       const nuevasImagenes = req.files.map(file => `${req.protocol}://${req.get('host')}/uploads/${file.filename}`);
+
+        // 3. Combinar las imágenes viejas (conservadas) y las nuevas
         const todasLasImagenes = [...imagenesExistentes, ...nuevasImagenes];
 
-        const datosActualizados = {
-            ...req.body, 
-            imagenes: todasLasImagenes
-        };
+        // 4. Preparar el resto de los datos a actualizar
+        const datosActualizados = { ...req.body };
+        datosActualizados.imagenes = todasLasImagenes; // Reemplazar con el array combinado
 
+        // 5. Actualizar la BD
         const auto = await Auto.findByIdAndUpdate(
             req.params.id, 
-            { $set: datosActualizados }, 
-            { new: true } 
+            { $set: datosActualizados }, // $set es importante para no borrar campos no enviados
+            { new: true } // Devuelve el documento actualizado
         );
 
         if (!auto) {
             return res.status(404).json({ msg: 'Auto no encontrado.' });
         }
-
         res.json({ msg: 'Auto actualizado correctamente.', auto });
-
+        
     } catch (error) {
         console.error("Error al actualizar auto:", error);
-        res.status(500).json({ msg: 'Error al actualizar el auto.' });
+        res.status(500).json({ msg: `Error al actualizar el auto: ${error.message}` });
     }
 };
 

@@ -18,7 +18,7 @@ document.addEventListener('DOMContentLoaded', () => {
         })
         .catch(error => {
             console.error('Error al obtener los autos desde la API:', error);
-            stockContainer.innerHTML = '<p class="text-center">No se pudieron cargar los vehículos.</p>';
+            stockContainer.innerHTML = '<p class="text-center">No se pudo cargar los vehículos.</p>';
         });
     
     const slideInElement = document.querySelector('.animate-slide-in');
@@ -67,7 +67,7 @@ function renderizarTarjetas(autos, contenedor, cantidad) {
                 <img src="${auto.imagenes[0]}" class="card-img-top" alt="Imagen de ${auto.modelo}">
                 <div class="card-details-overlay">
                     <ul>
-                        <li>Año/Modelo: ${auto.año}</li>
+                        <li>Año/Modelo: ${auto.anio}</li>
                         <li>Kilometraje: ${auto.kilometraje.toLocaleString('es-AR')} km</li>
                         <li>Transmisión: ${auto.transmision}</li>
                     </ul>

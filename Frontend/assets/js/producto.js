@@ -20,8 +20,8 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         })
         .catch(error => {
-             console.error("Error al obtener detalle del auto:", error);
-             document.querySelector('main').innerHTML = '<h1 class="text-center my-5">Error al cargar el vehículo</h1>';
+            console.error("Error al obtener detalle del auto:", error);
+            document.querySelector('main').innerHTML = '<h1 class="text-center my-5">Error al cargar el vehículo</h1>';
         });
 });
 
@@ -34,7 +34,7 @@ function rellenarDatos(auto) {
 
         const specsList = document.getElementById('producto-specs');
         specsList.innerHTML = `
-            <li class="list-group-item"><strong>Año/Modelo:</strong> ${auto.año}</li>
+            <li class="list-group-item"><strong>Año/Modelo:</strong> ${auto.anio}</li>
             <li class="list-group-item"><strong>Kilometraje:</strong> ${auto.kilometraje.toLocaleString('es-AR')}km</li>
             <li class="list-group-item"><strong>Transmisión:</strong> ${auto.transmision}</li>
             <li class="list-group-item"><strong>Color:</strong> ${auto.color}</li>

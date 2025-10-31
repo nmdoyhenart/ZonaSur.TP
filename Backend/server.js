@@ -11,7 +11,7 @@ const app = express();
 app.use(cors());
 app.use(express.json());
 
-app.use('/img', express.static(path.join(__dirname, '../Frontend/img')));
+app.use('/uploads', express.static(path.join(__dirname, 'public/uploads')));
 app.use('/api/usuarios', usuarioRoutes);
 app.use('/api/autos', autoRoutes);
 

@@ -54,7 +54,7 @@ function mostrarAutoEnCarrito(auto) {
                 <div class="col-md-8">
                     <div class="card-body">
                         <h5 class="card-title"><strong>${auto.modelo}</strong></h5>
-                        <p class="card-text">Año/modelo: ${auto.año}</p>
+                        <p class="card-text">Año/modelo: ${auto.anio}</p>
                         <p class="card-text">Kilometraje: ${auto.kilometraje.toLocaleString('es-AR')}km</p>
                         <p class="card-text">Transmisión: ${auto.transmision}</p>
                         <p class="card-text">Color: ${auto.color}</p>
