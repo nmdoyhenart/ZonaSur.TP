@@ -613,39 +613,43 @@ body.dark-mode .btn-secondary {
 }
 
 /* =============================================================== */
-/* ESTILOS PARA LA PÁGINA DEL CARRITO (NUEVO DISEÑO)            */
+/* SOLUCIÓN: Sobrescribir Carrito para el Modo Claro */
 /* =============================================================== */
 
-/* Contenedor principal de la tarjeta de reserva */
+/* Sobrescribe los estilos fijos oscuros con colores claros */
 #carrito-reserva-card {
-    background-color: #212529; /* Color oscuro del navbar */
-    color: #f8f9fa; /* Texto claro */
-    border: 1px solid #495057; /* Borde sutil */
-    border-radius: 0.5rem;
-    box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.15);
+    /* Fondo principal: Blanco/Claro */
+    background-color: #ffffff !important; 
+    color: #212529 !important; /* Texto: Oscuro */
+    border: 1px solid #dee2e6 !important; /* Borde más claro */
+    box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.05) !important;
 }
 
-/* Cabecera de la tarjeta */
+/* Cabecera de la tarjeta (Parte donde dice "Tu Reserva") */
 #carrito-reserva-card .card-header {
-    background-color: #343a40; /* Un poco más claro que el body */
-    border-bottom: 1px solid #495057;
+    background-color: #f8f9fa !important; /* Fondo de la cabecera: Gris muy claro */
+    color: #212529 !important; /* Asegura texto oscuro */
+    border-bottom: 1px solid #dee2e6 !important;
 }
 
-/* Pie de la tarjeta */
+/* Pie de la tarjeta (Parte donde dice "Total de Reservas") */
 #carrito-reserva-card .card-footer {
-    background-color: #212529; /* Mismo color que el body de la tarjeta */
-    border-top: 1px solid #495057;
-}
-
-/* Título del auto */
-#carrito-reserva-card .card-title {
-    font-weight: 600;
+    background-color: #ffffff !important; /* Fondo del pie: Blanco/Claro */
+    color: #212529 !important; /* Asegura texto oscuro */
+    border-top: 1px solid #dee2e6 !important;
 }
 
 /* Detalles (año, km, etc.) */
 #carrito-reserva-card .list-unstyled {
-    font-size: 0.95rem;
-    color: #ced4da; /* Un gris un poco más apagado */
+    color: #6c757d !important; /* Gris intermedio para detalles */
+}
+
+/* Las celdas de la tabla, si existen, también deben ser claras */
+#carrito-reserva-card .table td, 
+#carrito-reserva-card .table th {
+    background-color: transparent !important; /* Fondo transparente o blanco */
+    color: #212529 !important; /* Texto oscuro */
+    border-color: #dee2e6 !important; /* Líneas de la tabla claras */
 }
 
 /* =============================================================== */
@@ -662,4 +666,209 @@ body.dark-mode .btn-secondary {
 #ticket-table tfoot {
     border-top: 2px solid #212529;
     font-size: 1.1rem;
+}
+
+
+
+
+
+
+
+
+/* =============================================================== */
+/* SOLUCIÓN FINAL: Anular Estilos Oscuros Fijos del Carrito */
+/* =============================================================== */
+
+/* 1. Contenedor Principal (#carrito-reserva-card) */
+#carrito-reserva-card {
+    background-color: #ffffff !important; /* Fondo principal: Blanco/Claro */
+    color: #212529 !important;          /* Texto: Oscuro */
+    border: 1px solid #dee2e6 !important;
+    box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.05) !important;
+}
+
+/* Cabecera de la tarjeta (donde dice "Tu Reserva (1 item)") */
+#carrito-reserva-card .card-header {
+    background-color: #f8f9fa !important; 
+    color: #212529 !important;          
+    border-bottom: 1px solid #dee2e6 !important;
+}
+
+/* Pie de la tarjeta (donde dice "Total de Reservas") */
+#carrito-reserva-card .card-footer {
+    background-color: #ffffff !important; 
+    color: #212529 !important;
+    border-top: 1px solid #dee2e6 !important;
+}
+
+/* 2. Fila del Producto y Celdas Interiores (La parte que se ve negra ahora) */
+
+/* Aplica fondo y color oscuro a todas las celdas (td/th) dentro de la tarjeta. */
+/* El uso de !important aquí es crucial para anular el estilo fijo. */
+#carrito-reserva-card table td,
+#carrito-reserva-card table th {
+    background-color: transparent !important; 
+    color: #212529 !important;          
+    border-color: #dee2e6 !important;
+}
+
+/* Si la fila de la tabla o el div de producto está forzado a negro */
+#carrito-reserva-card table tr,
+#carrito-reserva-card .d-flex {
+    background-color: #ffffff !important; 
+}
+
+/* =============================================================== */
+/* SOLUCIÓN FINAL: Arreglar el Botón 'Seguir Comprando' en Modo Claro */
+/* =============================================================== */
+
+/* Apunta al botón dentro de la tarjeta de reserva */
+/* Usa un selector lo suficientemente específico */
+#carrito-reserva-card .btn-outline-light, /* Si usa esta clase de Bootstrap */
+#carrito-reserva-card .btn-secondary,    /* Si usa esta clase de Bootstrap */
+#carrito-reserva-card a.btn {            /* Si es un enlace con clase btn */
+    /* El color de texto debe ser oscuro (#212529 o similar) */
+    color: #212529 !important; 
+    /* El borde también debe ser oscuro para que se defina bien */
+    border-color: #ced4da !important; 
+    background-color: transparent !important; /* Asegurar fondo transparente/blanco */
+}
+
+/* Si es un enlace simple sin clases de botón */
+#carrito-reserva-card a {
+    color: #212529 !important;
+}
+
+/* =============================================================== */
+/* SOLUCIÓN MODO OSCURO: Restaurar el Carrito Oscuro */
+/* =============================================================== */
+
+/* 1. Contenedor Principal (#carrito-reserva-card) */
+.dark-mode #carrito-reserva-card {
+    /* Fondo principal: Gris muy oscuro */
+    background-color: #212529 !important; 
+    /* Texto: Claro */
+    color: #f8f9fa !important;          
+    /* Borde: Oscuro/Gris */
+    border: 1px solid #495057 !important;
+    box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.4) !important;
+}
+
+/* 2. Cabecera (donde dice "Tu Reserva") */
+.dark-mode #carrito-reserva-card .card-header {
+    background-color: #343a40 !important; /* Un gris un poco más claro */
+    color: #f8f9fa !important;          
+    border-bottom: 1px solid #495057 !important;
+}
+
+/* 3. Pie de la tarjeta (donde dice "Total de Reservas") */
+.dark-mode #carrito-reserva-card .card-footer {
+    background-color: #212529 !important; /* Mismo color que el cuerpo principal */
+    color: #f8f9fa !important;
+    border-top: 1px solid #495057 !important;
+}
+
+/* 4. Fila del Producto y Celdas Interiores (La tabla) */
+.dark-mode #carrito-reserva-card table td,
+.dark-mode #carrito-reserva-card table th {
+    /* Fondo: Transparente o el mismo del contenedor */
+    background-color: transparent !important; 
+    color: #f8f9fa !important;          
+    border-color: #495057 !important;
+}
+
+/* 5. Restaurar el botón 'Seguir Comprando' para que se vea bien en oscuro */
+.dark-mode #carrito-reserva-card a.btn,
+.dark-mode #carrito-reserva-card .btn-outline-light {
+    color: #f8f9fa !important; /* Texto blanco para el botón */
+    border-color: #f8f9fa !important; /* Borde blanco para el botón */
+    background-color: transparent !important; 
+}
+
+/* =============================================================== */
+/* SOLUCIÓN FINAL MODO OSCURO (Máxima Especificidad) */
+/* =============================================================== */
+
+/* 1. Contenedor Principal, Cabecera y Pie */
+.dark-mode #carrito-reserva-card, 
+.dark-mode #carrito-reserva-card .card-header,
+.dark-mode #carrito-reserva-card .card-footer {
+    /* Fondo: Gris Oscuro */
+    background-color: #212529 !important; 
+    /* Texto: Blanco */
+    color: #f8f9fa !important;          
+    /* Borde: Sutil */
+    border-color: #495057 !important;
+}
+
+/* 2. Celdas de la Tabla (Las filas blancas) */
+/* Apunta a los TD y TH dentro de cualquier tabla dentro del carrito en modo oscuro */
+.dark-mode #carrito-reserva-card table td,
+.dark-mode #carrito-reserva-card table th {
+    /* Fondo: Gris Oscuro */
+    background-color: #212529 !important; 
+    /* Texto: Blanco */
+    color: #f8f9fa !important;          
+    /* Borde: Sutil */
+    border-color: #495057 !important;
+}
+
+/* 3. Texto del botón 'Seguir Comprando' (Que se ve en blanco sobre fondo blanco) */
+.dark-mode #carrito-reserva-card a,
+.dark-mode #carrito-reserva-card .btn-outline-light {
+    /* Texto: Blanco */
+    color: #f8f9fa !important; 
+    /* Borde: Sutil */
+    border-color: #495057 !important;
+}
+
+/* 4. Texto del total de reservas (ya que el color verde puede ser difícil de ver) */
+.dark-mode #carrito-reserva-card .text-success {
+    /* Usa un color que destaque, como un verde más brillante o blanco */
+    color: #69F0AE !important; 
+}
+
+/* =============================== */
+/*   M O D A L   D E   T I C K E T */
+/* =============================== */
+
+#ticketModal .modal-content {
+    background-color: #ffffff !important;
+    color: #212529 !important;
+}
+
+/* Texto principal */
+#ticketModal .modal-body p,
+#ticketModal .modal-body span,
+#ticketModal .modal-body strong {
+    color: #212529 !important;
+}
+
+/* Encabezados */
+#ticketModal .modal-title {
+    color: #212529 !important;
+}
+
+/* Tabla del ticket */
+#ticketModal table {
+    color: #212529 !important;
+}
+
+#ticketModal table thead th {
+    background-color: #f0f0f0 !important;
+    color: #212529 !important;
+    border-bottom: 2px solid #ccc !important;
+}
+
+#ticketModal table tbody td {
+    background-color: #ffffff !important;
+    color: #212529 !important;
+    border-color: #d0d0d0 !important;
+}
+
+/* Fila de total */
+#ticketModal table tfoot td {
+    background-color: #ffffff !important;
+    color: #212529 !important;
+    border-top: 2px solid #ccc !important;
 }
