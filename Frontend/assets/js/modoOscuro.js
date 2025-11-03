@@ -18,7 +18,7 @@ document.addEventListener('DOMContentLoaded', () => {
         darkModeIcon.alt = 'Luna para modo oscuro';
     }
 
-  
+
     toggleButton.addEventListener('click', () => {
         body.classList.toggle('dark-mode');
 

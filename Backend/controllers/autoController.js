@@ -27,7 +27,6 @@ const obtenerAutoPorId = async (req, res) => {
     }
 };
 
-// --- CREAR AUTO (CORREGIDO) ---
 const crearAuto = async (req, res) => {
     const { modelo, anio, kilometraje, transmision, color, precio } = req.body;
 
@@ -45,7 +44,7 @@ const crearAuto = async (req, res) => {
             transmision,
             color,
             precio,
-            imagenes // 3. Guardar el array de URLs públicas
+            imagenes
         });
 
         const autoGuardado = await nuevoAuto.save();
@@ -57,30 +56,24 @@ const crearAuto = async (req, res) => {
     }
 };
 
-// --- ACTUALIZAR AUTO (CORREGIDO) ---
 const actualizarAuto = async (req, res) => {
     try {
-        // 1. Obtener URLs de imágenes existentes que se quieren conservar
         let imagenesExistentes = [];
         if (req.body.existingImages) {
             imagenesExistentes = JSON.parse(req.body.existingImages);
         }
 
-        // 2. Obtener URLs de las nuevas imágenes subidas
-       const nuevasImagenes = req.files.map(file => `${req.protocol}://${req.get('host')}/uploads/${file.filename}`);
+        const nuevasImagenes = req.files.map(file => `${req.protocol}://${req.get('host')}/uploads/${file.filename}`);
 
-        // 3. Combinar las imágenes viejas (conservadas) y las nuevas
         const todasLasImagenes = [...imagenesExistentes, ...nuevasImagenes];
 
-        // 4. Preparar el resto de los datos a actualizar
         const datosActualizados = { ...req.body };
-        datosActualizados.imagenes = todasLasImagenes; // Reemplazar con el array combinado
+        datosActualizados.imagenes = todasLasImagenes;
 
-        // 5. Actualizar la BD
         const auto = await Auto.findByIdAndUpdate(
             req.params.id, 
-            { $set: datosActualizados }, // $set es importante para no borrar campos no enviados
-            { new: true } // Devuelve el documento actualizado
+            { $set: datosActualizados },
+            { new: true }
         );
 
         if (!auto) {
