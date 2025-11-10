@@ -106,39 +106,50 @@ function mostrarTablaCarrito(autos, cartContainer) {
     });
 
     const cartTableHTML = `
-        <div class="card shadow-sm col-md-10 col-lg-10 mx-auto" id="carrito-reserva-card">
-            <div class="card-body p-4 table-responsive">
-                <table class="table align-middle">
-                    <thead>
-                        <tr>
-                            <th>Foto</th>
-                            <th>Nombre</th>
-                            <th class="text-center">Cantidad</th>
-                            <th>Monto Reserva (10%)</th>
-                            <th>Acciones</th>
-                        </tr>
-                    </thead>
-                    <tbody>${itemsHTML}</tbody>
-                </table>
-            </div>
-            <div class="card-footer p-4">
-                <div class="row align-items-center">
-                    <div class="col-md-6 text-center text-md-start mb-3 mb-md-0">
-                        <button class="btn btn-danger" id="btn-vaciar-carrito">
-                            <i class="bi bi-trash-fill me-2"></i> Vaciar Carrito
-                        </button>
-                    </div>
-                    <div class="col-md-6 text-center text-md-end">
-                        <h5>Total de Reservas:</h5>
-                        <h3 class="text-success fw-bold" id="total-reserva-monto">
-                            u$s${totalReserva.toLocaleString('es-AR')}
-                        </h3>
-                        <button class="btn btn-success btn-lg mt-2" id="btn-confirmar-reserva">
-                            Confirmar Reserva
-                        </button>
-                    </div>
+    <div class="card shadow-sm col-md-10 col-lg-10 mx-auto" id="carrito-reserva-card">
+
+        <div class="card-header d-flex justify-content-between align-items-center px-4 py-3">
+            <a href="home.html#compra" class="btn btn-sm btn-outline-secondary">
+                ← Seguir comprando
+            </a>
+            <h5 class="mb-0">Tu Reserva (${autos.length} ${autos.length === 1 ? "item" : "items"})</h5>
+        </div>
+
+        <div class="card-body p-4 table-responsive">
+            <table class="table align-middle">
+                <thead>
+                    <tr>
+                        <th>Foto</th>
+                        <th>Nombre</th>
+                        <th class="text-center">Cantidad</th>
+                        <th>Monto Reserva (10%)</th>
+                        <th>Acciones</th>
+                    </tr>
+                </thead>
+                <tbody>${itemsHTML}</tbody>
+            </table>
+        </div>
+
+        <div class="card-footer p-4">
+            <div class="row align-items-center">
+                <div class="col-md-6 text-center text-md-start mb-3 mb-md-0">
+                    <button class="btn btn-danger" id="btn-vaciar-carrito">
+                        <i class="bi bi-trash-fill me-2"></i> Vaciar Carrito
+                    </button>
+                </div>
+
+                <div class="col-md-6 text-center text-md-end">
+                    <h5>Total de Reservas:</h5>
+                    <h3 class="text-success fw-bold" id="total-reserva-monto">
+                        u$s${totalReserva.toLocaleString('es-AR')}
+                    </h3>
+                    <button class="btn btn-success btn-lg mt-2" id="btn-confirmar-reserva">
+                        Confirmar Reserva
+                    </button>
                 </div>
             </div>
+        </div>
+
         </div>
     `;
     
@@ -148,23 +159,24 @@ function mostrarTablaCarrito(autos, cartContainer) {
 }
 
 function activarControlesCarrito() { 
-    // --- Listeners para Confirmar y Vaciar ---
+    // --- Confirmar ---
     const btnConfirmar = document.getElementById('btn-confirmar-reserva');
     if (btnConfirmar) {
         btnConfirmar.addEventListener('click', prepararTicketYMostrarModal);
     }
     
+    // --- Vaciar ---
     const btnVaciar = document.getElementById("btn-vaciar-carrito");
     if (btnVaciar) {
         btnVaciar.addEventListener("click", vaciarCarrito);
     }
 
-    // --- Listeners para Eliminar ---
+    // --- Eliminar ---
     document.querySelectorAll('.btn-eliminar-item').forEach(btn =>
         btn.addEventListener('click', () => eliminarItemDelCarrito(btn.dataset.id))
     );
 
-    // --- Listeners para Sumar (+) ---
+    // --- Sumar ---
     document.querySelectorAll(".btn-sumar").forEach(btn => {
         btn.addEventListener("click", () => {
             const id = btn.closest("tr").dataset.id;
@@ -180,7 +192,7 @@ function activarControlesCarrito() {
         });
     });
 
-    // --- Listeners para Restar (-) ---
+    // --- Restar ---
     document.querySelectorAll(".btn-restar").forEach(btn => {
         btn.addEventListener("click", () => {
             const id = btn.closest("tr").dataset.id;
@@ -255,7 +267,7 @@ async function prepararTicketYMostrarModal() {
     });
 
     document.getElementById("ticket-nombre").textContent = nombreUsuario;
-    document.getElementById("ticket-fecha").textContent = fecha;
+    document.getElementById("ticket-fecha").textContent = fechaActual;
     document.getElementById("ticket-tbody").innerHTML = ticketBodyHTML;
     document.getElementById("ticket-total").textContent = `u$s${totalTicket.toLocaleString("es-AR")}`;
 

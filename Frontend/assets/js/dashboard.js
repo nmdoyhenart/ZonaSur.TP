@@ -8,14 +8,13 @@ document.addEventListener('DOMContentLoaded', () => {
     // Tabs
     const usuariosTab = document.getElementById('usuarios-tab');
     const productosTab = document.getElementById('productos-tab');
+    const reservasTab = document.getElementById('reservas-tab');
 
     const addUserForm = document.getElementById('add-user-form');
     const vehiculoForm = document.getElementById('vehiculo-form');
 
     const cancelEditBtn = document.getElementById('cancelEditVehiculoBtn');
     const logoutBtn = document.getElementById('logoutBtn');
-
-    const reservasTab = document.getElementById('reservas-tab');
 
     // Inicializar input imágenes
     initVehiculoImageUploadInput("vehiculoImageUpload");

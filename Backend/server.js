@@ -18,7 +18,7 @@ app.use('/uploads', express.static(path.join(__dirname, 'public/uploads')));
 app.use('/api/usuarios', usuarioRoutes);
 app.use('/api/autos', autoRoutes);
 app.use('/api/motos', motoRoutes);
-app.use('/api/compras', reservaRoutes);
+app.use('/api/reservas', reservaRoutes);
 
 const PORT = process.env.PORT || 4000;
 

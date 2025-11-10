@@ -629,3 +629,24 @@ h1, h2, h3, h4, h5, h6, strong {
 .dark-mode .custom-shadow-car {
     filter: drop-shadow(0 0 0.75rem rgba(255, 255, 255, 0.05));
 }
+
+
+.dark-mode .btn-dark {
+    background-color: #f8f9fa;
+    color: #212529;
+    border: none;
+}
+.dark-mode .btn-dark:hover {
+    background-color: #e2e6ea;
+}
+
+
+/* Color por defecto (modo claro) */
+.catalogo-title {
+    color: #212529; /* negro clásico */
+}
+
+/* Color cuando está activado el modo oscuro */
+.dark-mode .catalogo-title {
+    color: #f8f9fa; /* blanco o gris claro */
+}
