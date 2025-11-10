@@ -1,7 +1,7 @@
 import { initVehiculoImageUploadInput } from './modules/ui.js';
 import { loadUsers, handleUserFormSubmit } from './modules/userHandlers.js';
 import { loadVehicles, handleVehiculoFormSubmit, resetVehiculoForm } from './modules/vehicleHandlers.js';
-import { loadReservations } from './modules/userHandlers.js';
+import { loadReservations } from './modules/reservationHandlers.js';
 
 document.addEventListener('DOMContentLoaded', () => {
 
