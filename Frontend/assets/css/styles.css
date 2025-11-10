@@ -1,66 +1,99 @@
 /* =============================================================== */
-/* 1. ESTILOS GENERALES Y BASE                                     */
+/* 1. ESTILOS GENERALES Y BASE (MODO CLARO POR DEFECTO)          */
 /* =============================================================== */
-
 body {
     font-family: 'Montserrat', sans-serif;
-    background-color: #f8f9fa;
+    background-color: #f8f9fa; /* Fondo claro por defecto */
+    color: #212529; /* Texto oscuro por defecto */
     margin: 0;
     padding: 0;
     line-height: 1.6;
+    transition: background-color 0.3s, color 0.3s;
 }
 
 .bg-black {
     background-color: #000 !important;
 }
 
+a {
+    color: #000000;
+}
+
+h1, h2, h3, h4, h5, h6, strong {
+    color: #111111; /* Títulos y texto fuerte oscuros */
+}
+
+.text-muted {
+    color: #6c757d !important; /* Color 'muted' estándar de Bootstrap */
+}
+
 /* =============================================================== */
-/* 2. COMPONENTES REUTILIZABLES                                    */
+/* 2. COMPONENTES REUTILIZABLES (ESTILO CLARO)                     */
 /* =============================================================== */
 
-/* --- 2.1. Tarjetas de Producto --- */
+/* --- 2.1. Tarjetas del Home (producto-box) --- */
+.producto-box {
+    position: relative;
+    background-color: #ffffff;
+    border: 1px solid #ddd;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+    transition: all 0.3s ease;
+}
+.producto-box:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+}
+.producto-img img {
+    width: 100%;
+    height: 250px;
+    object-fit: cover;
+    display: block;
+}
+.producto-nombre {
+    background-color: #212529;
+    color: #fff;
+    font-weight: 600;
+    padding: 1rem;
+    text-align: center;
+    font-size: 1.1rem;
+}
+
+/* --- 2.2. Tarjetas de Producto (Estilo Antiguo/Opcional) --- */
 .card-producto {
     border: 1px solid #ddd; 
     border-radius: 0; 
     box-shadow: none;
     transition: all 0.2s ease-in-out;
 }
-
 .card-producto .card-img-top {
     width: 100%;
     height: 250px;
     object-fit: cover;
     border-radius: 0; 
 }
-
 .card-producto .card-body {
     background-color: #212529;
     padding: 1rem;
     color: #fff;
 }
-
 .card-producto .card-title {
     font-size: 1rem;
     font-weight: normal;
     margin-bottom: 0;
 }
-
-/* --- 2.2. Efectos Hover para Tarjetas --- */
 .card-producto:hover {
     transform: translateY(-10px); 
     box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2); 
     border-color: #4A90E2;
 }
-
 .card-producto:hover .card-img {
     transform: scale(1.1); 
 }
-
 .card-img-wrapper {
     position: relative;
     overflow: hidden;
 }
-
 .card-details-overlay {
     position: absolute;
     top: 0;
@@ -75,11 +108,9 @@ body {
     opacity: 0;
     transition: opacity 0.3s ease-in-out;
 }
-
 .card-producto:hover .card-details-overlay {
     opacity: 1;
 }
-
 .card-details-overlay ul {
     list-style: none;
     padding: 0;
@@ -88,14 +119,14 @@ body {
     text-align: center;
 }
 
-/* --- 2.3. Formularios (Login, Registro, Venta) --- */
+/* --- 2.3. Formularios (Login, Venta, Dashboard) --- */
 .registro-titulo {
     font-weight: 700; 
     text-align: center;
     margin-top: 50px;
     margin-bottom: 30px;
     font-size: 2.5rem;
-    color: #212529;
+    color: #212529; /* Hereda color oscuro */
     text-transform: uppercase;
 }
 
@@ -105,10 +136,9 @@ body {
     padding: 30px; 
     border: 1px solid #e9ecef;
     border-radius: 4px; 
-    background-color: white; 
+    background-color: #ffffff; /* Fondo blanco por defecto */
     box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.05); 
 }
-
 .contenedor-formulario label {
     display: block;
     margin-top: 10px;
@@ -116,8 +146,10 @@ body {
     color: #343a40;
     font-size: 0.9rem;
 }
-
-.contenedor-formulario input {
+.contenedor-formulario input,
+.contenedor-formulario textarea,
+.contenedor-formulario .form-control,
+.contenedor-formulario .form-select {
     width: 100%;
     padding: 12px;
     margin-top: 5px;
@@ -127,28 +159,53 @@ body {
     box-sizing: border-box;
     transition: border-color 0.2s, box-shadow 0.2s;
     font-family: 'Montserrat', sans-serif;
+    background-color: #fff; /* Fondo blanco */
+    color: #212529; /* Texto oscuro */
 }
-
-.contenedor-formulario input:focus {
+.contenedor-formulario input::placeholder,
+.contenedor-formulario textarea::placeholder {
+    color: #6c757d; /* Color de placeholder */
+    opacity: 1; 
+}
+.contenedor-formulario input:focus,
+.contenedor-formulario textarea:focus,
+.contenedor-formulario .form-select:focus {
     border-color: #4A90E2;
     box-shadow: 0 0 0 0.2rem rgba(74, 144, 226, 0.25); 
     outline: none;
+    background-color: #fff;
+    color: #212529;
+}
+.contenedor-formulario .form-select option {
+    background-color: #fff; 
+    color: #212529;
+}
+.contenedor-formulario .form-check-label {
+    color: #212529;
 }
 
+/* --- 2.4. Botones de Acción de Formularios --- */
 .acciones {
     margin-top: 25px;
     display: flex;
     justify-content: space-between; 
 }
-
 .acciones .btn, .acciones button {
     flex-grow: 1;
     margin: 0 5px; 
     font-weight: 600;
     padding: 12px;
 }
+.acciones .btn-primary { 
+    background-color: #4A90E2; 
+    border-color: #4A90E2;
+}
+.acciones .btn-primary:hover { 
+    background-color: #3b74b6; 
+    border-color: #3b74b6;
+}
 
-/* --- 2.4. Mensajes de Feedback (Error/Éxito) --- */
+/* --- 2.5. Mensajes de Feedback (Error/Éxito) --- */
 #mensaje { 
     margin-top: 20px; 
     padding: 15px; 
@@ -156,7 +213,6 @@ body {
     font-size: 1.1rem;
     font-weight: 600;
 }
-
 #mensaje ul {
     list-style-type: none;
     padding-left: 0;
@@ -166,72 +222,45 @@ body {
 #mensaje li {
    margin-bottom: 4px;
 }
-
 .mensaje-exito {
     background-color: #d4edda;
     color: #155724; 
     border: 1px solid #c3e6cb;
 }
-
 .mensaje-error {
     background-color: #f8d7da;
     color: #721c24; 
     border: 1px solid #f5c6cb;
 }
 
+/* --- 2.6. Iconos --- */
+.icon-lg {
+    font-size: 3rem; /* Versión para Bootstrap Icons */
+    color: #333;
+}
+
 /* =============================================================== */
-/* 3. ESTILOS ESPECÍFICOS POR SECCIÓN / PÁGINA                     */
+/* 3. ESTILOS ESPECÍFICOS POR SECCIÓN (MODO CLARO)                 */
 /* =============================================================== */
 
 /* --- 3.1. Sección Trayectoria (Home) --- */
 .custom-shadow-car {
     filter: drop-shadow(0 0 1rem rgba(0, 0, 0, 0.1));
 }
-
-.icon-lg {
-    font-size: 3rem;
-    color: #333;
-}
-
 #trayectoria h2 {
     font-weight: 300;
 }
-
 #trayectoria .lead {
     font-size: 1.1rem;
     line-height: 1.8;
     color: #555;
 }
-
 #trayectoria .h4 {
     font-weight: bold;
     color: #333;
 }
 
-#trayectoria .text-muted {
-    font-size: 0.9rem;
-}
-
-/* --- 3.2. Animaciones (Trayectoria) --- */
-.animate-slide-in {
-    opacity: 0;
-    transform: translateX(-100px);
-    transition: opacity 0.8s ease-out, transform 0.8s ease-out;
-}
-
-.animate-fade-in {
-    opacity: 0;
-    transform: translateY(20px);
-    transition: opacity 0.8s ease-out, transform 0.8s ease-out;
-    transition-delay: 0.4s; 
-}
-
-.is-visible {
-    opacity: 1;
-    transform: none;
-}
-
-/* --- 3.3. Página de Producto --- */
+/* --- 3.2. Página de Producto --- */
 .producto-hero-section {
     height: 70vh;
     background-size: cover;
@@ -241,31 +270,27 @@ body {
     align-items: flex-end;
     padding: 2rem;
 }
-
 #producto-specs .list-group-item {
     border-bottom: 1px solid #eee !important;
     border-top: none;
     border-left: none;
     border-right: none;
     padding: 1rem 0;
+    background-color: transparent; /* Fondo transparente */
 }
-
 #producto-galeria {
     border-radius: 0.5rem;
     overflow: hidden;
     border: 1px solid #eee;
 }
-
 #producto-galeria .carousel-item img {
     height: 350px;
     object-fit: cover;
     width: 100%;
 }
-
 .gallery-wrapper {
     text-align: center;
 }
-
 #reservar-btn {
     margin-top: 1rem;
     border-radius: 5px;
@@ -275,28 +300,76 @@ body {
     letter-spacing: 1px;
     transition: all 0.3s ease;
 }
-
 #reservar-btn:hover {
     background-color: #212529;
     color: #fff;
     border-color: #212529;
 }
 
-/* --- 3.4. Página del Carrito --- */
-#cart-container .card img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
+/* --- 3.3. Página del Carrito --- */
+#carrito-reserva-card {
+    background-color: #ffffff; /* Fondo claro por defecto */
+    color: #212529;
+    border: 1px solid #dee2e6;
+    box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.05);
+}
+#carrito-reserva-card .card-header {
+    background-color: #f8f9fa; 
+    color: #212529;
+    border-bottom: 1px solid #dee2e6;
+}
+#carrito-reserva-card .card-footer {
+    background-color: #ffffff; 
+    color: #212529;
+    border-top: 1px solid #dee2e6;
+}
+#carrito-reserva-card .table td,
+#carrito-reserva-card .table th {
+    background-color: transparent; 
+    color: #212529;
+    border-color: #dee2e6;
+}
+#carrito-reserva-card .list-unstyled {
+    color: #6c757d;
+}
+#carrito-reserva-card a.btn,
+#carrito-reserva-card .btn-outline-light {
+    color: #212529; 
+    border-color: #ced4da; 
+    background-color: transparent; 
 }
 
-/* --- 3.5. Página de Venta --- */
-#image-upload-container {
+/* --- 3.4. Modal del Ticket (Siempre Claro) --- */
+#ticketModal .modal-content {
+    background-color: #ffffff !important;
+    color: #212529 !important;
+}
+#ticketModal .modal-body p,
+#ticketModal .modal-body span,
+#ticketModal .modal-body strong,
+#ticketModal .modal-title,
+#ticketModal table,
+#ticketModal table thead th,
+#ticketModal table tbody td,
+#ticketModal table tfoot td {
+    color: #212529 !important;
+}
+#ticket-table thead th {
+    border-bottom: 2px solid #212529;
+}
+#ticket-table tfoot {
+    border-top: 2px solid #212529;
+    font-size: 1.1rem;
+}
+
+/* --- 3.5. Página de Venta / Dashboard (Upload) --- */
+#image-upload-container,
+#auto-image-upload-container {
     border: 2px dashed #ddd;
     border-radius: 5px;
     padding: 20px;
     text-align: center;
 }
-
 .upload-label {
     cursor: pointer;
     background-color: #f8f9fa;
@@ -307,19 +380,18 @@ body {
     display: inline-block;
     margin-top: 10px;
 }
-
 .upload-label:hover {
     background-color: #e9ecef;
 }
-
-#image-preview-container {
+#image-preview-container,
+#auto-image-preview-container {
     display: flex;
     gap: 10px;
     flex-wrap: wrap;
     justify-content: center;
     margin-bottom: 15px;
+    min-height: 90px;
 }
-
 .img-preview-wrapper {
     position: relative;
     width: 120px;
@@ -328,13 +400,11 @@ body {
     overflow: hidden;
     cursor: grab;
 }
-
 .img-preview {
     width: 100%;
     height: 100%;
     object-fit: cover;
 }
-
 .remove-img-btn {
     position: absolute;
     top: 5px;
@@ -350,525 +420,212 @@ body {
     cursor: pointer;
     font-size: 12px;
 }
-
 .dragging {
     opacity: 0.5;
 }
 
-/* --- 3.6 Estilos por default del modo claro --- */
-body {
-    background-color: #f4f4f4; 
-    color: #333333;
-    transition: background-color 0.3s, color 0.3s;
+/* --- 3.6. Dashboard --- */
+.dashboard-container {
+    max-width: 90%; 
+    margin: 0 auto 50px auto; 
+    padding: 30px; 
+    border: 1px solid #e9ecef; 
+    border-radius: 4px; 
+    background-color: white; 
+    box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.05);
 }
-a {
-    color: #000000; 
+#usuarios-card-container { /* Esta regla parece muy específica, la mantengo */
+    height: auto; 
+    min-height: unset; 
+    padding: 20px; 
+    padding-bottom: 20px; 
+    margin-bottom: 30px; 
 }
-h1, h2, h3 {
-    color: #111111;
+#auto-form {
+    background-color: #f8f9fa; /* Fondo gris claro para el formulario */
+    border-color: #dee2e6;
 }
 
+/* =============================================================== */
+/* 4. MODO OSCURO                                                  */
+/* =============================================================== */
 
-/* --- cuando el body cambiar a modo oscuro --- */
 .dark-mode {
     background-color: #1a1a1a; 
     color: #f4f4f4;
 }
-
 .dark-mode a {
     color: #99ccff; 
 }
 .dark-mode h1,
 .dark-mode h2,
-.dark-mode h3 {
+.dark-mode h3,
+.dark-mode h4,
+.dark-mode h5,
+.dark-mode h6,
+.dark-mode strong {
     color: #ffffff; 
 }
-
-.dark-mode .texto-secundario {
-    color: #aaaaaa; 
-}
-
-.dark-mode .container {
-    background-color: #1a1a1a !important; 
+.dark-mode .text-muted {
+    color: #aaaaaa !important; 
 }
 .dark-mode .icon-lg { 
     color: #ffffff !important; 
 }
 
-.dark-mode .text-muted {
-    color: #aaaaaa !important; 
+/* --- 4.1. Componentes Modo Oscuro --- */
+.dark-mode .producto-box {
+    background-color: #2a2a2a; /* Fondo oscuro para la tarjeta */
+    border-color: #444;
 }
-
-.dark-mode strong {
-    color: #ffffff !important;
+.dark-mode .producto-nombre {
+    background-color: #1a1a1a; /* Fondo más oscuro para la barra */
+    color: #f4f4f4;
 }
-.dark-mode section {
-    background-color: #1a1a1a !important; 
-}
-
-.dark-mode .container-fluid {
-    background-color: #1a1a1a !important; 
-}
-
-.dark-mode .bg-white {
-    background-color: #1a1a1a !important; 
-}
-
-
 .dark-mode .list-group-flush .list-group-item {
     background-color: #1a1a1a !important;
-    
     color: #f4f4f4 !important;
-
     border-color: #444444 !important;
 }
 
-.dark-mode .contenedor-formulario {
-    background-color: #1a1a1a!important; 
-    
-    padding: 20px; 
-    border-radius: 8px;
-    box-shadow: 0 4px 10px rgba(0,0,0,0.5); 
-}
-
-body.dark-mode .d-flex {
-    background-color: #1a1a1a !important; 
-}
-
-
-body.dark-mode .btn-secondary {
-    background-color: #1a1a1a !important;
-    border-color: #f4f4f4 !important; 
-}
-
-
-.dark-mode .d-flex {
-    background-color: #2a2a2a !important; 
-    border-radius: 8px;
-    padding: 10px;
-}
-
-.dark-mode .resumen-container,
-.dark-mode .card,
-.dark-mode .contenedor-reserva,
-.dark-mode .container-reserva {
-    background-color: #2a2a2a !important; 
-    color: #f4f4f4 !important;            
-    border-color: #444444 !important;    
-    box-shadow: 0 0 10px rgba(255,255,255,0.05); 
-}
-
-.dark-mode .resumen-container h5,
-.dark-mode .resumen-container p,
-.dark-mode .resumen-container span,
-.dark-mode .resumen-container strong {
-    color: #f4f4f4 !important;
-}
-
-.dark-mode .btn-success {
-    background-color: #28a745 !important;
-    color: #fff !important;
-    border-color: #1f7a31 !important;
-}
-
-.dark-mode .btn-success:hover {
-    background-color: #1f7a31 !important;
-}
-
-
+/* --- 4.2. Formularios Modo Oscuro --- */
 .dark-mode .registro-titulo {
     color: #ffffff !important; 
 }
-
-.dark-mode .contenedor-formulario label,
-.dark-mode .contenedor-formulario p,
-.dark-mode .contenedor-formulario small,
-.dark-mode #image-upload-container,
-.dark-mode #image-upload-container p {
-    color: #f4f4f4 !important; 
+.dark-mode .contenedor-formulario,
+.dark-mode .dashboard-container,
+.dark-mode #usuarios-card-container {
+    background-color: #2a2a2a !important; 
+    border-color: #444444 !important;
+    color: #f4f4f4;
 }
-
+.dark-mode .contenedor-formulario label,
+.dark-mode .dashboard-container .card-title,
+.dark-mode #auto-form .form-label,
+.dark-mode #add-user-form .form-label,
+.dark-mode .form-check-label {
+    color: #ffffff !important;
+}
 .dark-mode .contenedor-formulario input,
-.dark-mode .contenedor-formulario textarea {
+.dark-mode .contenedor-formulario textarea,
+.dark-mode .dashboard-container input,
+.dark-mode .dashboard-container textarea,
+.dark-mode .dashboard-container .form-control,
+.dark-mode .dashboard-container .form-select {
     background-color: #333333; 
-    
     color: #ffffff; 
     border-color: #555555 !important;
 }
-
-
 .dark-mode .contenedor-formulario input::placeholder,
-.dark-mode .contenedor-formulario textarea::placeholder {
+.dark-mode .contenedor-formulario textarea::placeholder,
+.dark-mode .dashboard-container form .form-control::placeholder {
     color: #aaaaaa; 
     opacity: 1; 
 }
+.dark-mode .dashboard-container .form-select option {
+    background-color: #444444; 
+    color: #ffffff;
+}
+.dark-mode #auto-form {
+    background-color: #333333 !important; 
+    border-color: #555555 !important;
+}
+.dark-mode .dashboard-container form .form-check-label {
+    color: #ffffff !important; 
+}
+.dark-mode .dashboard-container form .form-check-input {
+    background-color: #444; 
+    border-color: #666;
+}
+.dark-mode .dashboard-container form .form-check-input:checked {
+    background-color: #0d6efd; /* Mantiene el azul de Bootstrap */
+    border-color: #0d6efd;
+}
+.dark-mode .dashboard-container form .form-text {
+    color: #aaaaaa !important;
+}
 
+/* --- 4.3. Upload Modo Oscuro --- */
 .dark-mode .upload-label {
     background-color: #333333; 
     color: #ffffff; 
     border-color: #555555;
 }
 
-.d-flex {
-    gap:15px;
-}
-
-
-/* MODO OSCURO DASHBOARD.HTML */
-
-.dark-mode .card.dashboard-container {
-    background-color: #2a2a2a !important; 
-    border-color: #444444 !important;
-}
-
-/* El título "Gestión de Usuarios" */
-.dark-mode .card.dashboard-container .card-title {
-    color: #f4f4f4 !important;
-}
-
-
-
-.dark-mode #add-user-form {
-    background-color: #333333 !important; 
-    color: #f4f4f4 !important; 
-    border-color: #555555 !important;
-}
-
-.dark-mode #add-user-form p {
-    color: #f4f4f4 !important;
-}
-
-
-.dark-mode #add-user-form .form-label {
-    color: #ffffff !important;
-}
-
-.dark-mode #add-user-form .form-control {
-    background-color: #444444; 
-    color: #ffffff;
-    border-color: #666666 !important;
-}
-
-/* Checkbox "Admin" */
-.dark-mode #add-user-form .form-check-label {
-    color: #ffffff !important; 
-}
-
-.dark-mode #add-user-form .form-check-input {
-    background-color: #444444; 
-    border-color: #666666;
-}
-
-
-
-.dark-mode .card.dashboard-container {
-    background-color: #2a2a2a !important; 
-    border-color: #444444 !important;
-}
-
-
-.dark-mode .card.dashboard-container .card-title {
-    color: #f4f4f4 !important;
-}
-
-
-
-.dark-mode #auto-form {
-    background-color: #333333 !important; 
-    color: #f4f4f4 !important;
-    border-color: #555555 !important;
-}
-
-
-
-.dark-mode #auto-form .form-label {
-    color: #ffffff !important;
-}
-
-.dark-mode #auto-form .form-control,
-.dark-mode #auto-form .form-select {
-    background-color: #444444; 
-    color: #ffffff;
-    border-color: #666666 !important;
-}
-
-.dark-mode #auto-form .form-select option {
-    background-color: #444444; 
-    color: #ffffff;
-}
-
-.dark-mode #auto-form .text-muted {
-    color: #aaaaaa !important;
-}
-
-
-.dark-mode #auto-form .btn-secondary {
-    background-color: #444444 !important; 
-    border-color: #666666 !important;
-    color: #f4f4f4 !important; 
-}
-
-.dark-mode #auto-form .btn-secondary:hover {
-    background-color: #555555 !important;
-}
-
-/* =============================================================== */
-/* SOLUCIÓN: Sobrescribir Carrito para el Modo Claro */
-/* =============================================================== */
-
-/* Sobrescribe los estilos fijos oscuros con colores claros */
-#carrito-reserva-card {
-    /* Fondo principal: Blanco/Claro */
-    background-color: #ffffff !important; 
-    color: #212529 !important; /* Texto: Oscuro */
-    border: 1px solid #dee2e6 !important; /* Borde más claro */
-    box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.05) !important;
-}
-
-/* Cabecera de la tarjeta (Parte donde dice "Tu Reserva") */
-#carrito-reserva-card .card-header {
-    background-color: #f8f9fa !important; /* Fondo de la cabecera: Gris muy claro */
-    color: #212529 !important; /* Asegura texto oscuro */
-    border-bottom: 1px solid #dee2e6 !important;
-}
-
-/* Pie de la tarjeta (Parte donde dice "Total de Reservas") */
-#carrito-reserva-card .card-footer {
-    background-color: #ffffff !important; /* Fondo del pie: Blanco/Claro */
-    color: #212529 !important; /* Asegura texto oscuro */
-    border-top: 1px solid #dee2e6 !important;
-}
-
-/* Detalles (año, km, etc.) */
-#carrito-reserva-card .list-unstyled {
-    color: #6c757d !important; /* Gris intermedio para detalles */
-}
-
-/* Las celdas de la tabla, si existen, también deben ser claras */
-#carrito-reserva-card .table td, 
-#carrito-reserva-card .table th {
-    background-color: transparent !important; /* Fondo transparente o blanco */
-    color: #212529 !important; /* Texto oscuro */
-    border-color: #dee2e6 !important; /* Líneas de la tabla claras */
-}
-
-/* =============================================================== */
-/* ESTILOS PARA EL MODAL DEL TICKET                              */
-/* =============================================================== */
-
-#ticket-table {
-    margin-top: 20px;
-}
-#ticket-table thead th {
-    border-bottom: 2px solid #212529; /* Línea gruesa para el header de la tabla */
-    color: #212529;
-}
-#ticket-table tfoot {
-    border-top: 2px solid #212529;
-    font-size: 1.1rem;
-}
-
-
-
-
-
-
-
-
-/* =============================================================== */
-/* SOLUCIÓN FINAL: Anular Estilos Oscuros Fijos del Carrito */
-/* =============================================================== */
-
-/* 1. Contenedor Principal (#carrito-reserva-card) */
-#carrito-reserva-card {
-    background-color: #ffffff !important; /* Fondo principal: Blanco/Claro */
-    color: #212529 !important;          /* Texto: Oscuro */
-    border: 1px solid #dee2e6 !important;
-    box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.05) !important;
-}
-
-/* Cabecera de la tarjeta (donde dice "Tu Reserva (1 item)") */
-#carrito-reserva-card .card-header {
-    background-color: #f8f9fa !important; 
-    color: #212529 !important;          
-    border-bottom: 1px solid #dee2e6 !important;
-}
-
-/* Pie de la tarjeta (donde dice "Total de Reservas") */
-#carrito-reserva-card .card-footer {
-    background-color: #ffffff !important; 
-    color: #212529 !important;
-    border-top: 1px solid #dee2e6 !important;
-}
-
-/* 2. Fila del Producto y Celdas Interiores (La parte que se ve negra ahora) */
-
-/* Aplica fondo y color oscuro a todas las celdas (td/th) dentro de la tarjeta. */
-/* El uso de !important aquí es crucial para anular el estilo fijo. */
-#carrito-reserva-card table td,
-#carrito-reserva-card table th {
-    background-color: transparent !important; 
-    color: #212529 !important;          
-    border-color: #dee2e6 !important;
-}
-
-/* Si la fila de la tabla o el div de producto está forzado a negro */
-#carrito-reserva-card table tr,
-#carrito-reserva-card .d-flex {
-    background-color: #ffffff !important; 
-}
-
-/* =============================================================== */
-/* SOLUCIÓN FINAL: Arreglar el Botón 'Seguir Comprando' en Modo Claro */
-/* =============================================================== */
-
-/* Apunta al botón dentro de la tarjeta de reserva */
-/* Usa un selector lo suficientemente específico */
-#carrito-reserva-card .btn-outline-light, /* Si usa esta clase de Bootstrap */
-#carrito-reserva-card .btn-secondary,    /* Si usa esta clase de Bootstrap */
-#carrito-reserva-card a.btn {            /* Si es un enlace con clase btn */
-    /* El color de texto debe ser oscuro (#212529 o similar) */
-    color: #212529 !important; 
-    /* El borde también debe ser oscuro para que se defina bien */
-    border-color: #ced4da !important; 
-    background-color: transparent !important; /* Asegurar fondo transparente/blanco */
-}
-
-/* Si es un enlace simple sin clases de botón */
-#carrito-reserva-card a {
-    color: #212529 !important;
-}
-
-/* =============================================================== */
-/* SOLUCIÓN MODO OSCURO: Restaurar el Carrito Oscuro */
-/* =============================================================== */
-
-/* 1. Contenedor Principal (#carrito-reserva-card) */
+/* --- 4.4. Carrito Modo Oscuro --- */
 .dark-mode #carrito-reserva-card {
-    /* Fondo principal: Gris muy oscuro */
     background-color: #212529 !important; 
-    /* Texto: Claro */
-    color: #f8f9fa !important;          
-    /* Borde: Oscuro/Gris */
+    color: #f8f9fa !important;
     border: 1px solid #495057 !important;
-    box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.4) !important;
 }
-
-/* 2. Cabecera (donde dice "Tu Reserva") */
 .dark-mode #carrito-reserva-card .card-header {
-    background-color: #343a40 !important; /* Un gris un poco más claro */
-    color: #f8f9fa !important;          
+    background-color: #343a40 !important;
+    color: #f8f9fa !important;
     border-bottom: 1px solid #495057 !important;
 }
-
-/* 3. Pie de la tarjeta (donde dice "Total de Reservas") */
 .dark-mode #carrito-reserva-card .card-footer {
-    background-color: #212529 !important; /* Mismo color que el cuerpo principal */
+    background-color: #212529 !important;
     color: #f8f9fa !important;
     border-top: 1px solid #495057 !important;
 }
-
-/* 4. Fila del Producto y Celdas Interiores (La tabla) */
 .dark-mode #carrito-reserva-card table td,
 .dark-mode #carrito-reserva-card table th {
-    /* Fondo: Transparente o el mismo del contenedor */
     background-color: transparent !important; 
-    color: #f8f9fa !important;          
+    color: #f8f9fa !important;
     border-color: #495057 !important;
 }
-
-/* 5. Restaurar el botón 'Seguir Comprando' para que se vea bien en oscuro */
 .dark-mode #carrito-reserva-card a.btn,
 .dark-mode #carrito-reserva-card .btn-outline-light {
-    color: #f8f9fa !important; /* Texto blanco para el botón */
-    border-color: #f8f9fa !important; /* Borde blanco para el botón */
-    background-color: transparent !important; 
+    color: #f8f9fa !important;
+    border-color: #f8f9fa !important; 
 }
-
-/* =============================================================== */
-/* SOLUCIÓN FINAL MODO OSCURO (Máxima Especificidad) */
-/* =============================================================== */
-
-/* 1. Contenedor Principal, Cabecera y Pie */
-.dark-mode #carrito-reserva-card, 
-.dark-mode #carrito-reserva-card .card-header,
-.dark-mode #carrito-reserva-card .card-footer {
-    /* Fondo: Gris Oscuro */
-    background-color: #212529 !important; 
-    /* Texto: Blanco */
-    color: #f8f9fa !important;          
-    /* Borde: Sutil */
-    border-color: #495057 !important;
-}
-
-/* 2. Celdas de la Tabla (Las filas blancas) */
-/* Apunta a los TD y TH dentro de cualquier tabla dentro del carrito en modo oscuro */
-.dark-mode #carrito-reserva-card table td,
-.dark-mode #carrito-reserva-card table th {
-    /* Fondo: Gris Oscuro */
-    background-color: #212529 !important; 
-    /* Texto: Blanco */
-    color: #f8f9fa !important;          
-    /* Borde: Sutil */
-    border-color: #495057 !important;
-}
-
-/* 3. Texto del botón 'Seguir Comprando' (Que se ve en blanco sobre fondo blanco) */
-.dark-mode #carrito-reserva-card a,
-.dark-mode #carrito-reserva-card .btn-outline-light {
-    /* Texto: Blanco */
-    color: #f8f9fa !important; 
-    /* Borde: Sutil */
-    border-color: #495057 !important;
-}
-
-/* 4. Texto del total de reservas (ya que el color verde puede ser difícil de ver) */
 .dark-mode #carrito-reserva-card .text-success {
-    /* Usa un color que destaque, como un verde más brillante o blanco */
     color: #69F0AE !important; 
 }
 
-/* =============================== */
-/*   M O D A L   D E   T I C K E T */
-/* =============================== */
-
-#ticketModal .modal-content {
-    background-color: #ffffff !important;
-    color: #212529 !important;
+/* --- 4.5. Dashboard Modo Oscuro (Tablas y Formularios) --- */
+.dark-mode .dashboard-container .table {
+    color: #f4f4f4; 
+    border-color: #444;
+}
+.dark-mode .dashboard-container .table thead th {
+    color: #f4f4f4;
+    background-color: #333; 
+    border-bottom: 2px solid #555;
+}
+.dark-mode .dashboard-container .table tbody td,
+.dark-mode .dashboard-container .table tbody th {
+    background-color: #2a2a2a; 
+    border-color: #444;
+    color: #f4f4f4;
+}
+.dark-mode .dashboard-container .table-striped > tbody > tr:nth-of-type(odd) > * {
+    background-color: #2a2a2a; /* Mismo color que las filas pares */
+}
+.dark-mode .dashboard-container .table-hover > tbody > tr:hover > * {
+    background-color: #333; 
+    color: #f4f4f4;
+}
+.dark-mode .dashboard-container form {
+    background-color: #333 !important; 
+    border-color: #555 !important;
+}
+.dark-mode .dashboard-container .btn-secondary {
+    background-color: #444 !important; 
+    border-color: #666 !important;
+    color: #f4f4f4 !important; 
+}
+.dark-mode .dashboard-container .btn-secondary:hover {
+    background-color: #555 !important;
 }
 
-/* Texto principal */
-#ticketModal .modal-body p,
-#ticketModal .modal-body span,
-#ticketModal .modal-body strong {
-    color: #212529 !important;
+/* --- 4.6. Sección Trayectoria Modo Oscuro --- */
+.dark-mode #trayectoria {
+    background-color: #1a1a1a !important; /* Anula el 'bg-light' */
 }
-
-/* Encabezados */
-#ticketModal .modal-title {
-    color: #212529 !important;
+.dark-mode #trayectoria .lead {
+    color: #f4f4f4; /* Texto claro */
 }
-
-/* Tabla del ticket */
-#ticketModal table {
-    color: #212529 !important;
-}
-
-#ticketModal table thead th {
-    background-color: #f0f0f0 !important;
-    color: #212529 !important;
-    border-bottom: 2px solid #ccc !important;
-}
-
-#ticketModal table tbody td {
-    background-color: #ffffff !important;
-    color: #212529 !important;
-    border-color: #d0d0d0 !important;
-}
-
-/* Fila de total */
-#ticketModal table tfoot td {
-    background-color: #ffffff !important;
-    color: #212529 !important;
-    border-top: 2px solid #ccc !important;
+.dark-mode .custom-shadow-car {
+    filter: drop-shadow(0 0 0.75rem rgba(255, 255, 255, 0.05));
 }

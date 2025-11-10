@@ -28,12 +28,12 @@ const obtenerAutoPorId = async (req, res) => {
 };
 
 const crearAuto = async (req, res) => {
-    const { modelo, anio, kilometraje, transmision, color, precio } = req.body;
+    const { modelo, anio, kilometraje, transmision, color, stock, precio } = req.body;
 
     const imagenes = req.files.map(file => `${req.protocol}://${req.get('host')}/uploads/${file.filename}`);
 
     try {
-        if (!modelo || !anio || !precio || !imagenes || imagenes.length === 0) {
+        if (!modelo || !anio || !precio || !kilometraje || !transmision || !color || !stock || !imagenes || imagenes.length === 0) {
             return res.status(400).json({ msg: 'Faltan campos obligatorios o imágenes.' });
         }
 

@@ -6,7 +6,7 @@ const obtenerMotos = async (req, res) => {
         res.json(motos);
     } catch (error) {
         console.error("Error al obtener motos:", error);
-        res.status(500).json({ msg: 'Error al obtener los vehículos.' });
+        res.status(500).json({ msg: 'Error al obtener las motos.' });
     }
 };
 
@@ -21,19 +21,19 @@ const obtenerMotoPorId = async (req, res) => {
     } catch (error) {
         console.error("Error al obtener moto por ID:", error);
         if (error.kind === 'ObjectId') {
-            return res.status(404).json({ msg: 'ID de moto inválido.' });
+            return res.status(404).json({ msg: 'ID inválida.' });
         }
         res.status(500).json({ msg: 'Error al obtener la moto.' });
     }
 };
 
 const crearMoto = async (req, res) => {
-    const { modelo, anio, kilometraje, cilindrada, color, precio } = req.body;
+    const { modelo, anio, kilometraje, cilindrada, color, precio, stock } = req.body;
 
     const imagenes = req.files.map(file => `${req.protocol}://${req.get('host')}/uploads/${file.filename}`);
 
     try {
-        if (!modelo || !anio || !precio || !kilometraje || !cilindrada || !color || !imagenes || imagenes.length === 0) {
+        if (!modelo || !anio || !kilometraje || !cilindrada || !color || !precio || imagenes.length === 0) {
             return res.status(400).json({ msg: 'Faltan campos obligatorios o imágenes.' });
         }
 
@@ -44,15 +44,16 @@ const crearMoto = async (req, res) => {
             cilindrada,
             color,
             precio,
+            stock: stock || 5,
             imagenes
         });
 
-        const motoGuardado = await nuevaMoto.save();
-        res.status(201).json({ msg: 'Moto añadida exitosamente.', auto: motoGuardado });
+        const motoGuardada = await nuevaMoto.save();
+        res.status(201).json({ msg: 'Moto añadida exitosamente.', moto: motoGuardada });
 
     } catch (error) {
         console.error("Error al crear moto:", error);
-        res.status(500).json({ msg: `Error en el servidor al añadir la moto: ${error.message}` });
+        res.status(500).json({ msg: `Error en el servidor: ${error.message}` });
     }
 };
 
@@ -67,11 +68,10 @@ const actualizarMoto = async (req, res) => {
 
         const todasLasImagenes = [...imagenesExistentes, ...nuevasImagenes];
 
-        const datosActualizados = { ...req.body };
-        datosActualizados.imagenes = todasLasImagenes;
+        const datosActualizados = { ...req.body, imagenes: todasLasImagenes };
 
         const moto = await Moto.findByIdAndUpdate(
-            req.params.id, 
+            req.params.id,
             { $set: datosActualizados },
             { new: true }
         );
@@ -79,10 +79,11 @@ const actualizarMoto = async (req, res) => {
         if (!moto) {
             return res.status(404).json({ msg: 'Moto no encontrada.' });
         }
+
         res.json({ msg: 'Moto actualizada correctamente.', moto });
-        
+
     } catch (error) {
-        console.error("Error al actualizar moto: ", error);
+        console.error("Error al actualizar moto:", error);
         res.status(500).json({ msg: `Error al actualizar la moto: ${error.message}` });
     }
 };
@@ -98,9 +99,9 @@ const eliminarMoto = async (req, res) => {
         res.json({ msg: 'Moto eliminada correctamente.' });
 
     } catch (error) {
-        console.error("Error al eliminar auto:", error);
+        console.error("Error al eliminar moto:", error);
         if (error.kind === 'ObjectId') {
-            return res.status(404).json({ msg: 'ID de moto inválida.' });
+            return res.status(404).json({ msg: 'ID inválida.' });
         }
         res.status(500).json({ msg: 'Error al eliminar la moto.' });
     }

@@ -7,9 +7,10 @@ const motoSchema = new mongoose.Schema({
     cilindrada: { type: Number, required: true },
     color: { type: String, required: true },
     precio: { type: Number, required: true },
+    stock: { type: Number, required: true, default: 5 },
     imagenes: [{ type: String, required: true }]
 });
 
-const moto = mongoose.model('Moto', motoSchema);
+const Moto = mongoose.model('Moto', motoSchema);
 
-module.exports = moto;
+module.exports = Moto;

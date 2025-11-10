@@ -1,5 +1,3 @@
-// assets/js/modules/userHandlers.js
-
 // --- FUNCIONES PARA USUARIOS ---
 export async function loadUsers() {
     const usuariosContent = document.getElementById('usuarios-content'); 

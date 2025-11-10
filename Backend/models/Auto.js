@@ -7,6 +7,7 @@ const autoSchema = new mongoose.Schema({
     transmision: { type: String, required: true },
     color: { type: String, required: true },
     precio: { type: Number, required: true },
+    stock: { type: Number, required: true, default: 5 },
     imagenes: [{ type: String, required: true }], // Array de strings para las URLs de imagen
 });
 
