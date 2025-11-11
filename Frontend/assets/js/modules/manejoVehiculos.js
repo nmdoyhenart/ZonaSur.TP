@@ -1,10 +1,13 @@
-import { getVehiculoFiles, setVehiculoFiles, resetVehiculoFiles } from './ui.js';
+// Autos + motos unificados
+// CRUD completo con imágenes
 
-export async function loadVehicles() {
-    const container = document.getElementById("vehiculos-content");
-    if (!container) return;
+import { obtenerArchivosVehiculo, establecerArchivosVehiculo, reiniciarArchivosVehiculo} from './manejoVisual.js';
 
-    container.innerHTML = `<p>Cargando vehículos...</p>`;
+export async function cargarVehiculos() {
+    const contenedor = document.getElementById("vehiculos-content");
+    if (!contenedor) return;
+
+    contenedor.innerHTML = `<p>Cargando vehículos...</p>`;
 
     try {
         const [autosRes, motosRes] = await Promise.all([
@@ -24,7 +27,7 @@ export async function loadVehicles() {
         ];
 
         if (vehiculos.length === 0) {
-            container.innerHTML = `<p>No hay vehículos registrados.</p>`;
+            contenedor.innerHTML = `<p>No hay vehículos registrados.</p>`;
             return;
         }
 
@@ -47,16 +50,20 @@ export async function loadVehicles() {
         vehiculos.forEach(v => {
             html += `
                 <tr>
-                    <td class="text-center fs-4">${v.tipo === 'auto' ? '🚗' : '🏍️'}</td> 
+                    <td class="text-center fs-4">${v.tipo === 'auto' ? '🚗' : '🏍️'}</td>
                     <td>${v.modelo}</td>
                     <td>${v.anio}</td>
                     <td>u$s${v.precio.toLocaleString('es-AR')}</td>
                     <td>${v.imagenes.length}</td>
+
                     <td>
-                        <button class="btn btn-info btn-sm me-1 btn-editar" data-id="${v._id}" data-tipo="${v.tipo}">
+                        <button class="btn btn-info btn-sm me-1 btn-editar"
+                                data-id="${v._id}" data-tipo="${v.tipo}">
                             <i class="bi bi-pencil-fill"></i>
                         </button>
-                        <button class="btn btn-danger btn-sm btn-eliminar" data-id="${v._id}" data-tipo="${v.tipo}">
+
+                        <button class="btn btn-danger btn-sm btn-eliminar"
+                                data-id="${v._id}" data-tipo="${v.tipo}">
                             <i class="bi bi-trash-fill"></i>
                         </button>
                     </td>
@@ -65,19 +72,23 @@ export async function loadVehicles() {
         });
 
         html += `</tbody></table></div>`;
-        container.innerHTML = html;
+        contenedor.innerHTML = html;
 
         document.querySelectorAll(".btn-editar").forEach(btn =>
-            btn.addEventListener("click", () => editarVehiculo(btn.dataset.id, btn.dataset.tipo))
+            btn.addEventListener("click", () =>
+                editarVehiculo(btn.dataset.id, btn.dataset.tipo)
+            )
         );
 
         document.querySelectorAll(".btn-eliminar").forEach(btn =>
-            btn.addEventListener("click", () => eliminarVehiculo(btn.dataset.id, btn.dataset.tipo))
+            btn.addEventListener("click", () =>
+                eliminarVehiculo(btn.dataset.id, btn.dataset.tipo)
+            )
         );
 
     } catch (err) {
         console.error("Error:", err);
-        container.innerHTML = `<p class="text-danger">${err.message}</p>`;
+        contenedor.innerHTML = `<p class="text-danger">${err.message}</p>`;
     }
 }
 
@@ -91,7 +102,6 @@ async function editarVehiculo(id, tipo) {
 
         document.getElementById("vehiculoId").value = v._id;
         document.getElementById("vehiculoTipo").value = tipo;
-
         document.getElementById("vehiculoModelo").value = v.modelo;
         document.getElementById("vehiculoAnio").value = v.anio;
         document.getElementById("vehiculoKilometraje").value = v.kilometraje;
@@ -101,16 +111,15 @@ async function editarVehiculo(id, tipo) {
         if (tipo === "auto") {
             document.querySelector(".tipo-auto").classList.remove("d-none");
             document.querySelector(".tipo-moto").classList.add("d-none");
-
             document.getElementById("vehiculoTransmision").value = v.transmision;
+
         } else {
             document.querySelector(".tipo-auto").classList.add("d-none");
             document.querySelector(".tipo-moto").classList.remove("d-none");
-
             document.getElementById("vehiculoCilindrada").value = v.cilindrada;
         }
 
-        setVehiculoFiles(v.imagenes);
+        establecerArchivosVehiculo(v.imagenes);
 
         document.getElementById("submitVehiculoBtn").textContent = "Actualizar Vehículo";
         document.getElementById("cancelEditVehiculoBtn").classList.remove("d-none");
@@ -134,45 +143,46 @@ async function eliminarVehiculo(id, tipo) {
         if (!res.ok) throw new Error(data.msg);
 
         alert("Vehículo eliminado.");
-        loadVehicles();
+        cargarVehiculos();
 
     } catch (err) {
         alert("Error: " + err.message);
     }
 }
 
-export async function handleVehiculoFormSubmit(e) {
+export async function manejarSubmitVehiculo(e) {
     e.preventDefault();
 
     const id = document.getElementById("vehiculoId").value;
     const tipo = document.getElementById("vehiculoTipo").value;
 
     const formData = new FormData();
-
     formData.append("modelo", document.getElementById("vehiculoModelo").value);
     formData.append("anio", document.getElementById("vehiculoAnio").value);
     formData.append("kilometraje", document.getElementById("vehiculoKilometraje").value);
     formData.append("color", document.getElementById("vehiculoColor").value);
     formData.append("precio", document.getElementById("vehiculoPrecio").value);
 
+    // ✅ Campos según tipo
     if (tipo === "auto") {
         formData.append("transmision", document.getElementById("vehiculoTransmision").value);
     } else {
         formData.append("cilindrada", document.getElementById("vehiculoCilindrada").value);
     }
 
-    const files = getVehiculoFiles();
-    const existing = [];
+    // ✅ Obtener imágenes del módulo visual
+    const archivos = obtenerArchivosVehiculo();
+    const existentes = [];
 
-    files.forEach(f => {
+    archivos.forEach(f => {
         if (f instanceof File) {
             formData.append("imagenes", f);
         } else {
-            existing.push(f);
+            existentes.push(f);
         }
     });
 
-    formData.append("existingImages", JSON.stringify(existing));
+    formData.append("existingImages", JSON.stringify(existentes));
 
     const url = id
         ? `http://localhost:4000/api/${tipo + "s"}/${id}`
@@ -189,7 +199,7 @@ export async function handleVehiculoFormSubmit(e) {
         alert(id ? "Vehículo actualizado." : "Vehículo añadido.");
 
         resetVehiculoForm();
-        loadVehicles();
+        cargarVehiculos();
 
     } catch (err) {
         alert("Error: " + err.message);
@@ -203,5 +213,6 @@ export function resetVehiculoForm() {
     document.getElementById("submitVehiculoBtn").textContent = "Guardar Vehículo";
     document.getElementById("cancelEditVehiculoBtn").classList.add("d-none");
 
-    resetVehiculoFiles();
+    // ✅ Reset imágenes
+    reiniciarArchivosVehiculo();
 }

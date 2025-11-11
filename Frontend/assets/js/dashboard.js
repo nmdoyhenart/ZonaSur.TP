@@ -1,54 +1,68 @@
-import { initVehiculoImageUploadInput } from './modules/ui.js';
-import { loadUsers, handleUserFormSubmit } from './modules/userHandlers.js';
-import { loadVehicles, handleVehiculoFormSubmit, resetVehiculoForm } from './modules/vehicleHandlers.js';
-import { loadReservations } from './modules/reservationHandlers.js';
+import { inicializarInputImagenes } from './modules/manejoVisual.js';
+import { cargarUsuarios, manejarSubmitUsuario } from './modules/manejoUsuarios.js';
+import { cargarVehiculos, manejarSubmitVehiculo, resetVehiculoForm } from './modules/manejoVehiculos.js';
+import { cargarReservas } from './modules/manejoReservas.js';
 
 document.addEventListener('DOMContentLoaded', () => {
+    const tabUsuarios = document.getElementById('usuarios-tab');
+    const tabVehiculos = document.getElementById('productos-tab');
+    const tabReservas = document.getElementById('reservas-tab');
 
-    // Tabs
-    const usuariosTab = document.getElementById('usuarios-tab');
-    const productosTab = document.getElementById('productos-tab');
-    const reservasTab = document.getElementById('reservas-tab');
+    const formUsuarios = document.getElementById('add-user-form');
+    const formVehiculos = document.getElementById('vehiculo-form');
 
-    const addUserForm = document.getElementById('add-user-form');
-    const vehiculoForm = document.getElementById('vehiculo-form');
+    const btnCancelarEdicionVehiculo = document.getElementById('cancelEditVehiculoBtn');
+    const btnLogout = document.getElementById('logoutBtn');
 
-    const cancelEditBtn = document.getElementById('cancelEditVehiculoBtn');
-    const logoutBtn = document.getElementById('logoutBtn');
+    inicializarInputImagenes("vehiculoImageUpload");
 
-    // Inicializar input imágenes
-    initVehiculoImageUploadInput("vehiculoImageUpload");
+    // Pestaña: Usuarios
+    tabUsuarios?.addEventListener("shown.bs.tab", () => {
+        cargarUsuarios();
+    });
 
-    // Tabs listeners
-    usuariosTab?.addEventListener("shown.bs.tab", () => loadUsers());
-    productosTab?.addEventListener("shown.bs.tab", () => loadVehicles());
+    // Pestaña: Vehículos
+    tabVehiculos?.addEventListener("shown.bs.tab", () => {
+        cargarVehiculos();
+    });
 
-    // Form usuarios
-    addUserForm?.addEventListener("submit", handleUserFormSubmit);
+    // Pestaña: Reservas
+    tabReservas?.addEventListener("shown.bs.tab", () => {
+        cargarReservas();
+    });
 
-    // Form vehículos
-    vehiculoForm?.addEventListener("submit", handleVehiculoFormSubmit);
-    cancelEditBtn?.addEventListener("click", resetVehiculoForm);
+    // Form de Usuarios
+    formUsuarios?.addEventListener("submit", manejarSubmitUsuario);
 
-    // Logout
-    logoutBtn?.addEventListener("click", () => {
+    // Form de Vehículos
+    formVehiculos?.addEventListener("submit", manejarSubmitVehiculo);
+
+    // Botón cancelar edición de vehículo
+    btnCancelarEdicionVehiculo?.addEventListener("click", resetVehiculoForm);
+
+    btnLogout?.addEventListener("click", () => {
         window.location.href = "bienvenida.html";
     });
 
-    if(reservasTab) {
-        reservasTab.addEventListener('shown.bs.tab', () => loadReservations());
-    }
 
-    // Cargar panel activo al inicio
-    if (document.querySelector("#usuarios-panel.active")) loadUsers();
-    if (document.querySelector("#productos-panel.active")) loadVehicles();
-    if (document.querySelector('#reservas-panel.active')) { loadReservations(); }
+    // Cargar pestaña activa  dashboard
+    if (document.querySelector("#usuarios-panel.active")) cargarUsuarios();
+    if (document.querySelector("#productos-panel.active")) cargarVehiculos();
+    if (document.querySelector("#reservas-panel.active")) cargarReservas();
 
-    // Mostrar/ocultar campos según tipo
-    document.getElementById("vehiculoTipo").addEventListener("change", (e) => {
+
+    // Mostrar/ocultar campos del form segun tipo
+    const selectTipo = document.getElementById("vehiculoTipo");
+
+    selectTipo?.addEventListener("change", (e) => {
         const tipo = e.target.value;
 
-        document.querySelector(".tipo-auto").classList.toggle("d-none", tipo !== "auto");
-        document.querySelector(".tipo-moto").classList.toggle("d-none", tipo !== "moto");
+        // ─ Autos → mostrar transmisión
+        document.querySelector(".tipo-auto")
+            .classList.toggle("d-none", tipo !== "auto");
+
+        // ─ Motos → mostrar cilindrada
+        document.querySelector(".tipo-moto")
+            .classList.toggle("d-none", tipo !== "moto");
     });
 });
