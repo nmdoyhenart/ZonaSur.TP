@@ -6,20 +6,6 @@ const usuarioSchema = new mongoose.Schema({
         required: true,
         trim: true
     },
-
-    username: { 
-        type: String,
-        unique: true,
-        sparse: true, // Permite múltiples null/undefined si no se usa
-        trim: true
-    },
-    password: { 
-        type: String 
-    },
-    isAdmin: {
-        type: Boolean,
-        default: false
-    },
     fechaRegistro: {
         type: Date,
         default: Date.now

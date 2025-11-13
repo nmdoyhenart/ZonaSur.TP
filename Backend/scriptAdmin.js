@@ -1,16 +1,13 @@
-// Importamos las herramientas necesarias
 const mongoose = require('mongoose');
-const bcrypt = require('bcryptjs');
 const dotenv = require('dotenv');
-const Usuario = require('./models/Usuario');
+const Admin = require('./models/Admin'); 
 
 dotenv.config();
 
 const adminData = {
-    nombre: 'Administrador',
+    nombre: 'Administrador Script',
     username: 'administrador',
-    password: 'admin1234',
-    isAdmin: true
+    password: 'admin1234'
 };
 
 const crearAdmin = async () => {
@@ -18,21 +15,17 @@ const crearAdmin = async () => {
         await mongoose.connect(process.env.MONGO_URL);
         console.log('MongoDB Conectado para crear admin...');
 
-        const adminExistente = await Usuario.findOne({ username: adminData.username });
+        const adminExistente = await Admin.findOne({ username: adminData.username });
         if (adminExistente) {
             console.log('El usuario administrador ya existe.');
             return;
         }
 
-        // Hashea la contraseña
-        const salt = await bcrypt.genSalt(10);
-        const hashedPassword = await bcrypt.hash(adminData.password, salt);
-
-        const admin = new Usuario({
+        const admin = new Admin({
             nombre: adminData.nombre,
             username: adminData.username,
-            password: hashedPassword,
-            isAdmin: adminData.isAdmin
+            password: adminData.password
+            // El modelo se encarga del hash
         });
 
         await admin.save();

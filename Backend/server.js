@@ -1,6 +1,7 @@
 const express = require('express');
 const conectarDB = require('./config/db');
 const usuarioRoutes = require('./routes/usuarioRoutes');
+const adminRoutes = require('./routes/adminRoutes');
 const autoRoutes = require('./routes/autoRoutes');
 const motoRoutes = require('./routes/motoRoutes');
 const reservaRoutes = require('./routes/reservaRoutes');
@@ -16,6 +17,7 @@ app.use(express.json());
 app.use('/img', express.static(path.join(__dirname, '../Frontend/img')));
 app.use('/uploads', express.static(path.join(__dirname, 'public/uploads')));
 app.use('/api/usuarios', usuarioRoutes);
+app.use('/api/admin', adminRoutes);
 app.use('/api/autos', autoRoutes);
 app.use('/api/motos', motoRoutes);
 app.use('/api/reservas', reservaRoutes);
