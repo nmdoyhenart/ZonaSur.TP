@@ -2,10 +2,34 @@ const Auto = require('../models/Auto');
 
 const obtenerAutos = async (req, res) => {
     try {
-        const autos = await Auto.find();
-        res.json(autos);
+        const page = parseInt(req.query.page) || 1;
+        const limit = parseInt(req.query.limit) || 3; // Traeremos 3 autos por página
+        const skip = (page - 1) * limit; // Cuántos saltar
+
+        const filtro = { activo: true };
+
+        // Dos consultas a la vez: documentos de la pag y conteo total
+        const [autos, totalAutos] = await Promise.all([
+            Auto.find(filtro)
+                .skip(skip)
+                .limit(limit),
+            Auto.countDocuments(filtro)
+        ]);
+
+        // Calcular total de páginas
+        const totalPages = Math.ceil(totalAutos / limit);
+
+        // Enviar respuesta estructurada
+        res.json({
+            docs: autos,
+            totalPages: totalPages,
+            page: page,
+            hasNextPage: page < totalPages
+        });
+
     } catch (error) {
-        res.status(500).json({ msg: 'Error al obtener autos' });
+        console.error("Error al obtener autos:", error);
+        res.status(500).json({ msg: 'Error al obtener los vehículos.' });
     }
 };
 
