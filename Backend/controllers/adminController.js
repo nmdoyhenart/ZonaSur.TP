@@ -30,7 +30,6 @@ const loginAdmin = async (req, res) => {
         }
         
         const admin = await Admin.findOne({ username: username }); 
-
         if (!admin) {
             return res.status(400).json({ msg: 'Credenciales inválidas.' });
         }
@@ -40,11 +39,23 @@ const loginAdmin = async (req, res) => {
             return res.status(400).json({ msg: 'Credenciales inválidas.' });
         }
 
-        res.status(200).json({ 
-            msg: 'Inicio de sesión de administrador exitoso.', 
-            userId: admin._id,
+        // Guardar los datos del admin en la sesión del servidor
+        req.session.admin = {
+            id: admin._id,
             nombre: admin.nombre,
-            isAdmin: true // Siempre enviamos 'true' porque es un admin
+            username: admin.username
+        };
+
+        // Guardar la sesión
+        req.session.save((err) => {
+            if (err) {
+                console.error("Error al guardar la sesión:", err);
+                return res.status(500).json({ msg: 'Error al iniciar sesión.' });
+            }
+            res.status(200).json({ 
+                msg: 'Inicio de sesión de administrador exitoso.', 
+                admin: req.session.admin
+            });
         });
 
     } catch (error) {
@@ -71,9 +82,33 @@ const eliminarAdmin = async (req, res) => {
     }
 };
 
+const logoutAdmin = (req, res) => {
+    req.session.destroy((err) => {
+        if (err) {
+            return res.status(500).json({ msg: 'Error al cerrar sesión.' });
+        }
+        // Limpiamos la cookie en el navegador
+
+        res.clearCookie('connect.sid'); // Nombre por defecto de la cookie
+        res.status(200).json({ msg: 'Sesión cerrada exitosamente.' });
+    });
+};
+
+const verificarSesion = (req, res) => {
+    if (req.session.admin) {
+        // Si hay una sesión activa, devuelve los datos del admin
+        res.status(200).json({ admin: req.session.admin });
+    } else {
+        res.status(401).json({ msg: 'No autorizado.' });
+    }
+};
+
+
 module.exports = {
     registrarAdmin,
     loginAdmin,
+    logoutAdmin,     
+    verificarSesion,
     obtenerAdmins,
     eliminarAdmin
 };

@@ -35,8 +35,21 @@ document.addEventListener('DOMContentLoaded', () => {
     btnCancelarEdicionVehiculo?.addEventListener("click", resetVehiculoForm);
 
     // ---- LOGOUT ----
-    btnLogout?.addEventListener("click", () => {
-        window.location.href = "bienvenida.html";
+    btnLogout?.addEventListener("click", async () => {
+        try {
+            const res = await fetch('http://localhost:4000/api/admin/logout', { method: 'POST' });
+            const data = await res.json();
+            
+            if (res.ok) {
+                console.log(data.msg);
+                window.location.href = "login_adm.html";
+            } else {
+                throw new Error(data.msg);
+            }
+        } catch (error) {
+            console.error('Error al cerrar sesión:', error);
+            alert('No se pudo cerrar la sesión.');
+        }
     });
 
     // ---- FILTRO DE ESTADO DE VEHÍCULOS ----

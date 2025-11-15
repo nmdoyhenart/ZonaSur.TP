@@ -1,16 +1,11 @@
-// assets/js/bienvenida.js
 document.addEventListener('DOMContentLoaded', () => {
     const formulario = document.getElementById('welcome-form');
     const inputNombre = document.getElementById('nombreUsuario');
     const mensajeDiv = document.getElementById('mensaje');
 
-    formulario.addEventListener('submit', async function(e) { // Marcamos como async
+    formulario.addEventListener('submit', async function(e) {
         e.preventDefault();
         const nombre = inputNombre.value.trim();
-        mensajeDiv.textContent = '';
-        mensajeDiv.classList.remove('mensaje-error', 'mensaje-exito');
-        mensajeDiv.classList.add('d-none');
-
         if (nombre === '') {
             mensajeDiv.textContent = 'Por favor, ingresa tu nombre.';
             mensajeDiv.classList.add('mensaje-error');
@@ -33,8 +28,11 @@ document.addEventListener('DOMContentLoaded', () => {
                 throw new Error(data.msg || 'Error al guardar el nombre.');
             }
 
-            console.log('Visitante guardado en BD:', data.visitante);
+            localStorage.setItem('token', data.token);
+
             localStorage.setItem('nombreUsuario', nombre);
+
+            console.log('Visitante guardado y token recibido.');
             window.location.href = 'home.html';
 
         } catch (error) {

@@ -276,6 +276,7 @@ async function prepararTicketYMostrarModal() {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
+                'Authorization': `Bearer ${localStorage.getItem('token')}`
             },
             body: JSON.stringify({
                 usuarioNombre: nombreUsuario,
@@ -285,12 +286,18 @@ async function prepararTicketYMostrarModal() {
         });
 
         const data = await response.json();
+
         if (!response.ok) {
-            // Si el backend falla, mostramos un error
+            if (response.status === 401) {
+                alert('Tu sesión ha expirado o no eres válido. Por favor, identifícate de nuevo.');
+
+                window.location.href = 'bienvenida.html'; 
+                return; // Detener ejecución
+            }
+
             throw new Error(data.msg || 'Error al guardar la reserva.');
         }
 
-        // Si la API funciona, MOSTRAMOS EL TICKET
         console.log('Reserva guardada en BD:', data.reserva);
         new bootstrap.Modal(document.getElementById('ticketModal')).show();
         

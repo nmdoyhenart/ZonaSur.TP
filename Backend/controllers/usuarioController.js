@@ -1,17 +1,40 @@
 const Usuario = require('../models/Usuario');
+const jwt = require('jsonwebtoken');
+
+const dotenv = require('dotenv');
+dotenv.config();
 
 const registrarVisitante = async (req, res) => {
     const { nombre } = req.body;
     if (!nombre) {
         return res.status(400).json({ msg: 'El nombre es obligatorio.' });
     }
+    
     try {
         const nuevoVisitante = new Usuario({ nombre });
         await nuevoVisitante.save();
-        res.status(201).json({ 
-            msg: 'Visitante registrado exitosamente.',
-            visitante: nuevoVisitante
-        });
+
+        const payload = {
+            usuario: {
+                id: nuevoVisitante._id,
+                nombre: nuevoVisitante.nombre
+            }
+        };
+
+        jwt.sign(
+            payload,
+            process.env.JWT_SECRET,
+            { expiresIn: '5m' },
+            (error, token) => {
+                if (error) throw error;
+
+                res.status(201).json({ 
+                    msg: 'Visitante registrado exitosamente.',
+                    token: token
+                });
+            }
+        );
+
     } catch (error) {
         console.error("Error al registrar visitante:", error);
         res.status(500).json({ msg: 'Error en el servidor al guardar el nombre.' });

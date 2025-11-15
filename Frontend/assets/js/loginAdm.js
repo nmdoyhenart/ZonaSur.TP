@@ -5,6 +5,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const passwordInput = document.getElementById('password'); 
     const quickAccessBtn = document.getElementById('quickAccessBtn');
 
+    // Botón de acceso rápido
     if (quickAccessBtn) {
         quickAccessBtn.addEventListener('click', () => {
             usernameInput.value = 'administrador'; 
@@ -22,11 +23,11 @@ document.addEventListener('DOMContentLoaded', () => {
         mensajeDiv.classList.remove('mensaje-error', 'mensaje-exito');
         mensajeDiv.classList.add('d-none');
 
+        // Validación frontend
         let errores = [];
         if (!username || !contrasena) {
             errores.push('Ambos campos son obligatorios.');
         } 
-
         if (errores.length > 0) {
             mensajeDiv.classList.add('mensaje-error');
             mensajeDiv.innerHTML = '<p>¡Error al ingresar!</p><ul>' + errores.map(e => `<li>${e}</li>`).join('') + '</ul>';
@@ -45,22 +46,17 @@ document.addEventListener('DOMContentLoaded', () => {
                 headers: {'Content-Type': 'application/json'},
                 body: JSON.stringify(datosLogin) 
             });
+            
             const data = await response.json();
+
             if (response.ok) { 
-                setTimeout(() => {
-                    if (data.isAdmin) {
-                        window.location.href = 'dashboard.html'; 
-                    } else {
-                        mensajeDiv.classList.add('mensaje-error');
-                        mensajeDiv.textContent = 'Acceso denegado. Solo administradores.';
-                        mensajeDiv.classList.remove('d-none');
-                    }
-                }, 1500);
+                window.location.href = 'dashboard.html';
             } else {
                 mensajeDiv.classList.add('mensaje-error');
                 mensajeDiv.textContent = data.msg || 'Error al iniciar sesión.';
                 mensajeDiv.classList.remove('d-none');
             }
+
         } catch (error) {
             mensajeDiv.classList.add('mensaje-error');
             mensajeDiv.textContent = 'No se pudo conectar con el servidor.';
