@@ -1,18 +1,22 @@
 const express = require('express');
 const router = express.Router();
 const upload = require('../middleware/upload');
+
 const {
     obtenerMotos,
     obtenerMotoPorId,
     crearMoto,
     actualizarMoto,
-    eliminarMoto
+    activarMoto,
+    desactivarMoto
 } = require('../controllers/motoController');
 
 router.get('/', obtenerMotos);
 router.get('/:id', obtenerMotoPorId);
-router.post('/', upload, crearMoto);
-router.put('/:id', upload, actualizarMoto);
-router.delete('/:id', eliminarMoto);
+router.post('/', upload.array('imagenes', 4), crearMoto);
+router.put('/:id', upload.array('imagenes', 4), actualizarMoto);
+
+router.put('/activar/:id', activarMoto);
+router.put('/desactivar/:id', desactivarMoto);
 
 module.exports = router;

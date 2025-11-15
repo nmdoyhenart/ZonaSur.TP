@@ -4,6 +4,8 @@ import { cargarVehiculos, manejarSubmitVehiculo, resetVehiculoForm } from './mod
 import { cargarReservas } from './modules/manejoReservas.js';
 
 document.addEventListener('DOMContentLoaded', () => {
+
+    // ---- REFERENCIAS ----
     const tabUsuarios = document.getElementById('usuarios-tab');
     const tabVehiculos = document.getElementById('productos-tab');
     const tabReservas = document.getElementById('reservas-tab');
@@ -14,55 +16,42 @@ document.addEventListener('DOMContentLoaded', () => {
     const btnCancelarEdicionVehiculo = document.getElementById('cancelEditVehiculoBtn');
     const btnLogout = document.getElementById('logoutBtn');
 
+    const filtroEstadoVehiculo = document.getElementById("filtroEstadoVehiculo");
+    const selectTipo = document.getElementById("vehiculoTipo");
+
+    // ---- INICIALIZACIÓN DE INPUT IMÁGENES ----
     inicializarInputImagenes("vehiculoImageUpload");
 
-    // Pestaña: Usuarios
-    tabUsuarios?.addEventListener("shown.bs.tab", () => {
-        cargarUsuarios();
-    });
+    // ---- EVENTOS DE TABS ----
+    tabUsuarios?.addEventListener("shown.bs.tab", cargarUsuarios);
+    tabVehiculos?.addEventListener("shown.bs.tab", cargarVehiculos);
+    tabReservas?.addEventListener("shown.bs.tab", cargarReservas);
 
-    // Pestaña: Vehículos
-    tabVehiculos?.addEventListener("shown.bs.tab", () => {
-        cargarVehiculos();
-    });
-
-    // Pestaña: Reservas
-    tabReservas?.addEventListener("shown.bs.tab", () => {
-        cargarReservas();
-    });
-
-    // Form de Usuarios
+    // ---- EVENTOS DE FORMULARIOS ----
     formUsuarios?.addEventListener("submit", manejarSubmitUsuario);
-
-    // Form de Vehículos
     formVehiculos?.addEventListener("submit", manejarSubmitVehiculo);
 
-    // Botón cancelar edición de vehículo
+    // ---- CANCELAR EDICIÓN ----
     btnCancelarEdicionVehiculo?.addEventListener("click", resetVehiculoForm);
 
+    // ---- LOGOUT ----
     btnLogout?.addEventListener("click", () => {
         window.location.href = "bienvenida.html";
     });
 
+    // ---- FILTRO DE ESTADO DE VEHÍCULOS ----
+    filtroEstadoVehiculo?.addEventListener("change", cargarVehiculos);
 
-    // Cargar pestaña activa  dashboard
+    // ---- CARGAR TAB ACTIVA ----
     if (document.querySelector("#usuarios-panel.active")) cargarUsuarios();
     if (document.querySelector("#productos-panel.active")) cargarVehiculos();
     if (document.querySelector("#reservas-panel.active")) cargarReservas();
 
-
-    // Mostrar/ocultar campos del form segun tipo
-    const selectTipo = document.getElementById("vehiculoTipo");
-
+    // ---- MOSTRAR/OCULTAR CAMPOS SEGÚN TIPO DE VEHÍCULO ----
     selectTipo?.addEventListener("change", (e) => {
         const tipo = e.target.value;
 
-        // ─ Autos → mostrar transmisión
-        document.querySelector(".tipo-auto")
-            .classList.toggle("d-none", tipo !== "auto");
-
-        // ─ Motos → mostrar cilindrada
-        document.querySelector(".tipo-moto")
-            .classList.toggle("d-none", tipo !== "moto");
+        document.querySelector(".tipo-auto").classList.toggle("d-none", tipo !== "auto");
+        document.querySelector(".tipo-moto").classList.toggle("d-none", tipo !== "moto");
     });
 });

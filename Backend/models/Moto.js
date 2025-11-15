@@ -8,6 +8,7 @@ const motoSchema = new mongoose.Schema({
     color: { type: String, required: true },
     precio: { type: Number, required: true },
     stock: { type: Number, required: true, default: 5 },
+    activo: { type: Boolean, default: true },
     imagenes: [{ type: String, required: true }]
 });
 

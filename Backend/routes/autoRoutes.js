@@ -1,19 +1,22 @@
 const express = require('express');
-const { 
-    obtenerAutos, 
-    obtenerAutoPorId, 
-    crearAuto, 
-    actualizarAuto, 
-    eliminarAuto 
-} = require('../controllers/autoController');
+const router = express.Router();
 const upload = require('../middleware/upload');
 
-const router = express.Router();
+const {
+    obtenerAutos,
+    obtenerAutoPorId,
+    crearAuto,
+    actualizarAuto,
+    activarAuto,
+    desactivarAuto
+} = require('../controllers/autoController');
 
 router.get('/', obtenerAutos);
 router.get('/:id', obtenerAutoPorId);
-router.delete('/:id', eliminarAuto);
-router.post('/', upload, crearAuto);
-router.put('/:id', upload, actualizarAuto);
+router.post('/', upload.array('imagenes', 4), crearAuto);
+router.put('/:id', upload.array('imagenes', 4), actualizarAuto);
+
+router.put('/activar/:id', activarAuto);
+router.put('/desactivar/:id', desactivarAuto);
 
 module.exports = router;
