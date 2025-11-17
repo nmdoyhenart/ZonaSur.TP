@@ -1,19 +1,23 @@
 document.addEventListener('DOMContentLoaded', () => {
-    alert("¡Estás a un paso de reservar tu próximo vehículo!\nEl vehículo seleccionado se seña con un 10% del valor total.");
-
+    // Evita que el usuario cierre la pestaña accidentalmente
     window.addEventListener('beforeunload', function (e) {
         e.preventDefault();
     });
 
+    // Obtiene el parámetro "id" de la URL para identificar el vehículo
     const params = new URLSearchParams(window.location.search);
     const autoId = params.get('id');
+
+    // Contenedor donde se mostrará la info del vehículo
     const cartContainer = document.getElementById('cart-container');
 
+    // Si no hay ID en la URL, mostramos mensaje y detenemos la ejecución
     if (!autoId) {
         cartContainer.innerHTML = '<p class="text-center">No has seleccionado ningún vehículo para reservar.</p>';
         return;
     }
 
+    // Fetch a la API para obtener todos los autos
     fetch('http://localhost:4000/api/autos')
         .then(response => {
             if (!response.ok) {
@@ -22,13 +26,11 @@ document.addEventListener('DOMContentLoaded', () => {
             return response.json();
         })
         .then(data => {
-            console.log('ID buscado desde URL:', autoId);
-            console.log('Datos recibidos de la API:', data);
-            
             const auto = data.find(a => a._id === autoId);
 
             console.log('Resultado de find():', auto);
 
+            // Si se encuentra el vehículo, lo mostramos en el carrito
             if (auto) {
                 mostrarAutoEnCarrito(auto);
             } else {
@@ -43,6 +45,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
 function mostrarAutoEnCarrito(auto) {
     const cartContainer = document.getElementById('cart-container');
+
     const precioReserva = auto.precio * 0.10;
 
     const cartItemHTML = `
@@ -67,5 +70,6 @@ function mostrarAutoEnCarrito(auto) {
             </div>
         </div>
     `;
+
     cartContainer.innerHTML = cartItemHTML;
 }

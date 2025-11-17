@@ -1,22 +1,23 @@
-// Obtener reservas desde el backend
-// Renderizar tabla en el dashboard
-// Mostrar mensaje si no hay reservas
-
 export async function cargarReservas(orden = "desc") {
     const container = document.getElementById('reservas-content');
     if (!container) return;
 
+    // Mensaje inicial mientras carga
     container.innerHTML = '<p>Cargando reservas...</p>';
 
     try {
+        // Petición al backend
         const response = await fetch('http://localhost:4000/api/reservas');
 
+        // Validación de respuesta
         if (!response.ok) {
             throw new Error("No se pudieron cargar las reservas.");
         }
 
+        // Convertimos la respuesta en JSON
         let reservas = await response.json();
 
+        // Ordenar reservas por fecha según filtro elegido
         reservas.sort((a, b) => {
             const fechaA = new Date(a.fechaReserva);
             const fechaB = new Date(b.fechaReserva);
@@ -24,11 +25,13 @@ export async function cargarReservas(orden = "desc") {
             return orden === "asc" ? fechaA - fechaB : fechaB - fechaA;
         });
 
+        // Si no hay reservas, mostrar mensaje y cortar ejecución
         if (reservas.length === 0) {
             container.innerHTML = '<p>No hay reservas registradas.</p>';
             return;
         }
 
+        // Estructura inicial de la tabla con botón de filtro
         let tablaHTML = `
             <div class="d-flex justify-content-between align-items-center mb-3">
                 <div class="dropdown">
@@ -60,11 +63,14 @@ export async function cargarReservas(orden = "desc") {
                     <tbody id="reservas-tbody">
         `;
 
+        // Rellenar filas con cada reserva
         reservas.forEach(reserva => {
+            // Formatear productos reservados en un solo string
             const productosStr = reserva.productos
                 .map(p => `${p.modelo} (x${p.cantidad})`)
                 .join(', ');
 
+            // Agregar fila a la tabla
             tablaHTML += `
                 <tr>
                     <td>${new Date(reserva.fechaReserva).toLocaleString('es-AR')}</td>
@@ -75,14 +81,17 @@ export async function cargarReservas(orden = "desc") {
             `;
         });
 
+        // Cerrar tabla
         tablaHTML += `
                     </tbody>
                 </table>
             </div>
         `;
 
+        // Renderizar tabla final
         container.innerHTML = tablaHTML;
 
+        // Eventos para cambiar el orden desde el dropdown
         document.querySelectorAll(".filtro-reserva").forEach(btn => {
             btn.addEventListener("click", () => {
                 const nuevoOrden = btn.dataset.order;
@@ -91,7 +100,6 @@ export async function cargarReservas(orden = "desc") {
         });
 
     } catch (error) {
-        console.error("Error al cargar reservas:", error);
         container.innerHTML = `<p class="text-danger">${error.message}</p>`;
     }
 }

@@ -1,14 +1,6 @@
-// Módulo encargado de: 
-// Cargar autos en la tabla del panel admin
-// Preparar edición
-// Crear / actualizar autos
-// Eliminar autos
-// Manejar imágenes mediante
-
 import { obtenerArchivosVehiculo, establecerArchivosVehiculo, reiniciarArchivosVehiculo } from './manejoVisual.js';
 
 export async function cargarProductos() {
-
     const contenedorProductos = document.getElementById('productos-content');
     if (!contenedorProductos) return;
 
@@ -25,7 +17,7 @@ export async function cargarProductos() {
             return;
         }
 
-        // --- Generamos tabla ---
+        // --- Generación de la tabla ---
         let tablaHTML = `
         <div class="table-responsive mb-0">
             <table class="table table-striped table-hover">
@@ -65,14 +57,14 @@ export async function cargarProductos() {
         tablaHTML += `</tbody></table></div>`;
         contenedorProductos.innerHTML = tablaHTML;
 
-        // ✅ Activar botones de editar
+        // Activar botones de editar
         document.querySelectorAll('.btn-editar-auto').forEach(btn => {
             btn.addEventListener('click', e => {
                 editarAuto(e.currentTarget.dataset.id);
             });
         });
 
-        // ✅ Activar botones de eliminar
+        // Activar botones de eliminar
         document.querySelectorAll('.btn-eliminar-auto').forEach(btn => {
             btn.addEventListener('click', e => {
                 eliminarAuto(e.currentTarget.dataset.id);
@@ -87,7 +79,6 @@ export async function cargarProductos() {
 }
 
 async function eliminarAuto(id) {
-
     if (!confirm(`¿Estás seguro de que quieres eliminar el auto con ID: ${id}?`))
         return;
 
@@ -107,9 +98,6 @@ async function eliminarAuto(id) {
 }
 
 async function editarAuto(id) {
-
-    console.log(`Preparando edición del auto ID: ${id}`);
-
     try {
         const respuesta = await fetch(`http://localhost:4000/api/autos/${id}`);
         if (!respuesta.ok) throw new Error('No se pudo obtener los datos del auto.');
@@ -125,7 +113,7 @@ async function editarAuto(id) {
         document.getElementById('autoTransmision').value = auto.transmision;
         document.getElementById('autoColor').value = auto.color;
 
-        // ✅ Cargar vistas previas desde URLs
+        // Cargar vistas previas desde URLs
         establecerArchivosVehiculo(auto.imagenes);
 
         // Cambiar botones
@@ -140,13 +128,8 @@ async function editarAuto(id) {
     }
 }
 
-
-
-// ===========================================================
-// ✅ Resetear formulario de autos
-// ===========================================================
+// Resetear formulario de autos
 export function reiniciarFormularioAuto() {
-
     const formulario = document.getElementById('auto-form');
     if (!formulario) return;
 
@@ -156,15 +139,11 @@ export function reiniciarFormularioAuto() {
     document.getElementById('submitAutoBtn').textContent = 'Guardar Auto';
     document.getElementById('cancelEditBtn').classList.add('d-none');
 
-    // ✅ Resetear imágenes del módulo visual
+    // Resetear imágenes del módulo visual
     reiniciarArchivosVehiculo();
 }
 
-
-
-// ===========================================================
-// ✅ Crear / Actualizar auto
-// ===========================================================
+// Crear / Actualizar auto
 export async function enviarFormularioAuto(e) {
 
     e.preventDefault();
@@ -181,7 +160,7 @@ export async function enviarFormularioAuto(e) {
     formData.append('transmision', document.getElementById('autoTransmision').value);
     formData.append('color', document.getElementById('autoColor').value);
 
-    // ✅ Obtener imágenes desde manejoVisual.js
+    // Obtener imágenes desde manejoVisual.js
     const listaImagenes = obtenerArchivosVehiculo();
     const urlsExistentes = [];
 
@@ -193,7 +172,7 @@ export async function enviarFormularioAuto(e) {
         }
     });
 
-    // ✅ Enviar URLs existentes como JSON
+    // Enviar URLs existentes como JSON
     formData.append('existingImages', JSON.stringify(urlsExistentes));
 
     const url = autoId

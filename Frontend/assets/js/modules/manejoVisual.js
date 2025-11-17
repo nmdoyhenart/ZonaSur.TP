@@ -1,8 +1,3 @@
-// Módulo para manejar las imágenes del vehículo
-// - Vista previa de imágenes
-// - Límites
-// - Reordenamiento con arrastrar y soltar (drag & drop)
-
 let archivosVehiculo = []; // Almacena los archivos seleccionados
 let elementoArrastrado = null; // Guarda temporalmente el elemento que se está arrastrando
 
@@ -15,13 +10,11 @@ export function reiniciarArchivosVehiculo() {
     document.getElementById("vehiculo-image-preview-container").innerHTML = "";
 }
 
-// 🔹 Reemplaza los archivos actuales por un nuevo conjunto (útil al editar)
 export function establecerArchivosVehiculo(archivos) {
     archivosVehiculo = [...archivos]; 
     dibujarVistasPrevias(); 
 }
 
-// 🔹 Inicializa el input para cargar imágenes
 // Controla el límite de 4 imágenes y genera las vistas previas
 export function inicializarInputImagenes(idDelInput) {
     const input = document.getElementById(idDelInput);
@@ -39,26 +32,22 @@ export function inicializarInputImagenes(idDelInput) {
         // Agrega las nuevas imágenes al array principal
         archivosVehiculo.push(...archivosNuevos);
         dibujarVistasPrevias();
-        input.value = ""; // Limpia el input para evitar duplicados
+        input.value = "";
     });
 }
 
-// 🔹 Dibuja las vistas previas de todas las imágenes cargadas
 function dibujarVistasPrevias() {
     const contenedor = document.getElementById("vehiculo-image-preview-container");
-    contenedor.innerHTML = ""; // Limpia el contenido previo
+    contenedor.innerHTML = "";
 
     archivosVehiculo.forEach((archivo, indice) => {
-        // Crea el HTML de la vista previa
         const vistaPrevia = crearHtmlVistaPrevia(archivo, indice);
         // Asigna los eventos de arrastre y soltar
         asignarEventosArrastre(vistaPrevia);
-        // Agrega la vista al contenedor
         contenedor.appendChild(vistaPrevia);
     });
 }
 
-// 🔹 Crea el HTML para una imagen con botón de eliminar
 function crearHtmlVistaPrevia(archivo, indice) {
     const contenedor = document.createElement("div");
     contenedor.className = "img-preview-wrapper";
@@ -70,13 +59,11 @@ function crearHtmlVistaPrevia(archivo, indice) {
     img.className = "img-preview";
     img.src = archivo instanceof File ? URL.createObjectURL(archivo) : archivo;
 
-    // Botón para eliminar imagen
     const botonBorrar = document.createElement("button");
     botonBorrar.type = "button";
     botonBorrar.className = "remove-img-btn";
     botonBorrar.innerHTML = "&times;"; // Representa una "X"
 
-    // Evento: eliminar imagen del array y redibujar
     botonBorrar.onclick = (e) => {
         e.stopPropagation(); // Evita conflictos con el arrastre
         archivosVehiculo.splice(indice, 1); 
@@ -90,7 +77,6 @@ function crearHtmlVistaPrevia(archivo, indice) {
     return contenedor;
 }
 
-// 🔹 Asigna los eventos de arrastrar y soltar a cada imagen
 function asignarEventosArrastre(item) { 
     // Cuando empieza a arrastrarse
     item.addEventListener("dragstart", () => {
@@ -124,7 +110,6 @@ function asignarEventosArrastre(item) {
     });
 }
 
-// 🔹 Devuelve el elemento siguiente en función de la posición del mouse (x)
 function obtenerElementoSiguiente(container, x) {
     const items = [...container.querySelectorAll(".img-preview-wrapper:not(.dragging)")];
     
@@ -145,7 +130,6 @@ function obtenerElementoSiguiente(container, x) {
     return elementoMasCercano; 
 }
 
-// 🔹 Actualiza el orden del array de archivos según el orden visual
 function actualizarOrdenArchivos() {
     const container = document.getElementById("vehiculo-image-preview-container");
 
@@ -156,6 +140,5 @@ function actualizarOrdenArchivos() {
     // Reconstruye el array con el nuevo orden
     archivosVehiculo = nuevoOrdenIndices.map(i => archivosVehiculo[i]);
 
-    // Redibuja las vistas para actualizar los índices visibles
     dibujarVistasPrevias();
 }

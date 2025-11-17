@@ -9,6 +9,16 @@ body {
     padding: 0;
     line-height: 1.6;
     transition: background-color 0.3s, color 0.3s;
+
+}
+
+
+.fondo-bienvenida {
+    background-image: url('../../img/imagenFondo.jpg'); 
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-position: center center;
 }
 
 .bg-black {
@@ -649,4 +659,31 @@ h1, h2, h3, h4, h5, h6, strong {
 /* Color cuando está activado el modo oscuro */
 .dark-mode .catalogo-title {
     color: #f8f9fa; /* blanco o gris claro */
+}
+
+/* ========================= */
+/*    SWEETALERT DARK MODE   */
+/* ========================= */
+
+.dark-mode .swal2-popup {
+    background: #2c2c2c !important;
+    color: #f1f1f1 !important;
+}
+
+.dark-mode .swal2-title {
+    color: #ffffff !important;
+}
+
+.dark-mode .swal2-html-container {
+    color: #dcdcdc !important;
+}
+
+.dark-mode .swal2-confirm {
+    background-color: #6658ea !important;
+    color: white !important;
+}
+
+.dark-mode .swal2-cancel {
+    background-color: #555 !important;
+    color: white !important;
 }

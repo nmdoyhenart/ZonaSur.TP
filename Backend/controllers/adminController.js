@@ -2,18 +2,22 @@ const Admin = require('../models/Admin');
 const bcrypt = require('bcryptjs');
 
 const registrarAdmin = async (req, res) => {
-    const { nombre, username, password } = req.body;
+    const { nombre, username, password } = req.body; // Extrae los campos enviados en la petición
     try {
+        // Validación
         if (!nombre || !username || !password) {
             return res.status(400).json({ msg: 'Nombre, username y password son obligatorios.' });
         }
+
+        // Busca si ya existe un admin con el mismo username
         let admin = await Admin.findOne({ username });
+
         if (admin) {
             return res.status(400).json({ msg: 'El username de admin ya existe.' });
         }
         
         admin = new Admin({ nombre, username, password });
-        await admin.save(); 
+        await admin.save();
         
         res.status(201).json({ msg: 'Administrador creado exitosamente.' });
     } catch (error) {
@@ -29,24 +33,26 @@ const loginAdmin = async (req, res) => {
             return res.status(400).json({ msg: 'Usuario y contraseña son obligatorios.' });
         }
         
+        // Busca un administrador con el username indicado
         const admin = await Admin.findOne({ username: username }); 
         if (!admin) {
             return res.status(400).json({ msg: 'Credenciales inválidas.' });
         }
 
+        // Compara la contraseña enviada con la guardada
         const passwordCorrecto = await bcrypt.compare(password, admin.password);
         if (!passwordCorrecto) {
             return res.status(400).json({ msg: 'Credenciales inválidas.' });
         }
 
-        // Guardar los datos del admin en la sesión del servidor
+        // Guarda los datos del admin en la sesión del servidor
         req.session.admin = {
             id: admin._id,
             nombre: admin.nombre,
             username: admin.username
         };
 
-        // Guardar la sesión
+        // Guarda la sesión
         req.session.save((err) => {
             if (err) {
                 console.error("Error al guardar la sesión:", err);
@@ -66,7 +72,7 @@ const loginAdmin = async (req, res) => {
 
 const obtenerAdmins = async (req, res) => {
     try {
-        const admins = await Admin.find().select('-password');
+        const admins = await Admin.find().select('-password'); // Excluye el campo password
         res.json(admins);
     } catch (error) {
         res.status(500).json({ msg: 'Error al obtener admins.' });
@@ -75,7 +81,7 @@ const obtenerAdmins = async (req, res) => {
 
 const eliminarAdmin = async (req, res) => {
     try {
-        await Admin.findByIdAndDelete(req.params.id);
+        await Admin.findByIdAndDelete(req.params.id); // Elimina usando el ID enviado por parámetro
         res.json({ msg: 'Admin eliminado correctamente.' });
     } catch (error) {
         res.status(500).json({ msg: 'Error al eliminar admin.' });
@@ -83,19 +89,18 @@ const eliminarAdmin = async (req, res) => {
 };
 
 const logoutAdmin = (req, res) => {
-    req.session.destroy((err) => {
+    req.session.destroy((err) => { // Destruye la sesión en el servidor
         if (err) {
             return res.status(500).json({ msg: 'Error al cerrar sesión.' });
         }
-        // Limpiamos la cookie en el navegador
-        res.clearCookie('connect.sid'); // Nombre por defecto de la cookie
+        
+        res.clearCookie('connect.sid'); // Limpia la cookie de sesión en el navegador
         res.status(200).json({ msg: 'Sesión cerrada exitosamente.' });
     });
 };
 
 const verificarSesion = (req, res) => {
-    if (req.session.admin) {
-        // Si hay una sesión activa, devuelve los datos del admin
+    if (req.session.admin) { // Si la sesión existe devuelve los datos
         res.status(200).json({ admin: req.session.admin });
     } else {
         res.status(401).json({ msg: 'No autorizado.' });

@@ -42,7 +42,7 @@ document.addEventListener('DOMContentLoaded', () => {
             
             if (res.ok) {
                 console.log(data.msg);
-                window.location.href = "login_adm.html";
+                window.location.href = "bienvenida.html";
             } else {
                 throw new Error(data.msg);
             }

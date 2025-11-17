@@ -4,8 +4,11 @@ document.addEventListener('DOMContentLoaded', () => {
     const mensajeDiv = document.getElementById('mensaje');
 
     formulario.addEventListener('submit', async function(e) {
-        e.preventDefault();
-        const nombre = inputNombre.value.trim();
+        e.preventDefault(); // Evita que la página se recargue
+
+        const nombre = inputNombre.value.trim(); // Limpiamos espacios
+        
+        // Validación básica: campo vacío
         if (nombre === '') {
             mensajeDiv.textContent = 'Por favor, ingresa tu nombre.';
             mensajeDiv.classList.add('mensaje-error');
@@ -28,11 +31,12 @@ document.addEventListener('DOMContentLoaded', () => {
                 throw new Error(data.msg || 'Error al guardar el nombre.');
             }
 
+            // Guardamos el token recibido en el navegador
             localStorage.setItem('token', data.token);
 
+            // Guardamos también el nombre del usuario
             localStorage.setItem('nombreUsuario', nombre);
 
-            console.log('Visitante guardado y token recibido.');
             window.location.href = 'home.html';
 
         } catch (error) {

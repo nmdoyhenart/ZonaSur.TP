@@ -1,4 +1,3 @@
-// Backend/models/Reserva.js
 const mongoose = require('mongoose');
 
 const productoReservadoSchema = new mongoose.Schema({

@@ -12,7 +12,7 @@ document.addEventListener('DOMContentLoaded', () => {
         window.productosAll = [
             ...autos.map(a => ({ ...a, tipo: 'auto' })),
             ...motos.map(m => ({ ...m, tipo: 'moto' }))
-        ].filter(producto => producto.activo === true);
+        ].filter(producto => producto.activo === true); // Solo activos
 
         actualizarVista(window.productosAll, stockContainer, autosPorDefecto, true);
     })
@@ -28,7 +28,7 @@ document.addEventListener('DOMContentLoaded', () => {
         entries.forEach(entry => {
             if (entry.isIntersecting) {
                 entry.target.classList.add('is-visible');
-                observer.unobserve(entry.target);
+                observer.unobserve(entry.target); // Una vez visible, deja de observar
             }
         });
     }, { threshold: 0.3 });
@@ -51,13 +51,13 @@ window.filtrarVehiculos = function(tipo) {
 };
 
 function actualizarVista(productos, contenedor, cantidadAMostrar, mostrarMas) {
-    renderizarTarjetas(productos, contenedor, cantidadAMostrar);
-    renderizarBoton(productos, contenedor, cantidadAMostrar, mostrarMas);
+    renderizarTarjetas(productos, contenedor, cantidadAMostrar); // Crea las tarjetas de cada vehículo
+    renderizarBoton(productos, contenedor, cantidadAMostrar, mostrarMas); // Agrega botón para ver más/menos
 }
 
 function renderizarTarjetas(productos, contenedor, cantidad) {
     contenedor.innerHTML = '';
-    const itemsAMostrar = productos.slice(0, cantidad);
+    const itemsAMostrar = productos.slice(0, cantidad); // Solo muestra la cantidad indicada
 
     itemsAMostrar.forEach(item => {
         const cardColumn = document.createElement('div');
@@ -67,7 +67,8 @@ function renderizarTarjetas(productos, contenedor, cantidad) {
         cardColumn.innerHTML = `
             <div class="producto-box card bg-dark text-white h-100">
                 <div class="producto-img">
-                    <img src="${item.imagenes && item.imagenes.length ? item.imagenes[0] : '../img/placeholder.png'}" alt="${item.modelo}" class="card-img-top">
+                    <img src="${item.imagenes && item.imagenes.length ? item.imagenes[0] : '../img/placeholder.png'}" 
+                        alt="${item.modelo}" class="card-img-top">
                 </div>
                 <div class="card-body text-center producto-nombre">
                     <h5 class="card-title mb-0">${item.modelo || ''}</h5>
@@ -82,10 +83,12 @@ function renderizarTarjetas(productos, contenedor, cantidad) {
 
 function renderizarBoton(items, contenedor, cantidadActual, mostrarMas) {
     const autosPorDefecto = 6;
-    // removemos cualquier wrapper anterior del botón
+
+    // Remueve cualquier botón previo
     const existing = contenedor.querySelector('.ver-stock-wrapper');
     if (existing) existing.remove();
 
+    // Si no hay suficientes items, no se muestra el botón
     if (items.length <= autosPorDefecto) return;
 
     const wrapper = document.createElement('div');

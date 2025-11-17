@@ -24,7 +24,7 @@ app.use(session({
     cookie: {
         secure: false,
         httpOnly: true, // Front no puede leer la cookie
-        maxAge: 1000 * 60 * 5 // 1000ms * 60s * 5min = 300000ms
+        maxAge: 1000 * 60 * 30 // 1000ms * 60s * 30min = 1800000ms
     }
 }));
 
