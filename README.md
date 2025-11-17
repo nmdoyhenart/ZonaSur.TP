@@ -92,4 +92,14 @@ frontend/
 
 ---
 
+## 🛠️ Tecnologías Utilizadas
+
+| Área             | Tecnologías                                     |
+|------------------|--------------------------------------------------|
+| 🧑‍🎨 Frontend      | HTML, CSS, JavaScript, Bootstrap         |
+| ⚙️ Backend        | Node.js, Express.js, EJS, Mongoose        |
+| 🗃️ Base de datos  | MongoDb                              |
+| 🔒 Seguridad      | dotenv, validaciones Joi, middlewares,  |
+
+
 
