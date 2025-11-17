@@ -2,33 +2,10 @@ const Moto = require('../models/Moto');
 
 const obtenerMotos = async (req, res) => {
     try {
-        const page = parseInt(req.query.page) || 1;
-        const limit = parseInt(req.query.limit) || 3;
-        const skip = (page - 1) * limit; // Cuántos saltar
-
-        const filtro = { activo: true }; // Solo motos activas
-
-        // Dos consultas: documentos y  total
-        const [motos, totalMotos] = await Promise.all([
-            Moto.find(filtro)
-                .skip(skip)
-                .limit(limit),
-            Moto.countDocuments(filtro)
-        ]);
-
-        // Calcular total de páginas
-        const totalPages = Math.ceil(totalMotos / limit);
-
-        res.json({
-            docs: motos,
-            totalPages: totalPages,
-            page: page,
-            hasNextPage: page < totalPages
-        });
-
+        const motos = await Moto.find();
+        res.json(motos);
     } catch (error) {
-        console.error("Error al obtener motos:", error);
-        res.status(500).json({ msg: 'Error al obtener las motocicletas.' });
+        res.status(500).json({ msg: 'Error al obtener motos' });
     }
 };
 

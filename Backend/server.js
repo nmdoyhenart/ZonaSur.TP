@@ -18,7 +18,7 @@ app.use(express.json());
 app.use(cookieParser());
 
 app.use(session({
-    secret: 'tuPalabraSecretaMuyLargaYCompleja', // Clave para firmar la cookie
+    secret: 'zonaSurCars', // Clave para firmar la cookie
     resave: false, // No vuelve a guardar si no hay cambios
     saveUninitialized: false, // No guarda sesiones vacías
     cookie: {

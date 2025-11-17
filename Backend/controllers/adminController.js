@@ -88,7 +88,6 @@ const logoutAdmin = (req, res) => {
             return res.status(500).json({ msg: 'Error al cerrar sesión.' });
         }
         // Limpiamos la cookie en el navegador
-
         res.clearCookie('connect.sid'); // Nombre por defecto de la cookie
         res.status(200).json({ msg: 'Sesión cerrada exitosamente.' });
     });
@@ -102,7 +101,6 @@ const verificarSesion = (req, res) => {
         res.status(401).json({ msg: 'No autorizado.' });
     }
 };
-
 
 module.exports = {
     registrarAdmin,
