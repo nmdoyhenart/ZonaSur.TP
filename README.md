@@ -99,7 +99,7 @@ frontend/
 | 🧑‍🎨 Frontend      | HTML, CSS, JavaScript, Bootstrap         |
 | ⚙️ Backend        | Node.js, Express.js, Mongoose        |
 | 🗃️ Base de datos  | MongoDb                              |
-| 🔒 Seguridad      | dotenv, validaciones, middlewares,  |
+| 🔒 Seguridad      | dotenv, validaciones, middlewares  |
 
 
 
