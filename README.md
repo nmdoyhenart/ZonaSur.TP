@@ -97,9 +97,9 @@ frontend/
 | Área             | Tecnologías                                     |
 |------------------|--------------------------------------------------|
 | 🧑‍🎨 Frontend      | HTML, CSS, JavaScript, Bootstrap         |
-| ⚙️ Backend        | Node.js, Express.js, EJS, Mongoose        |
+| ⚙️ Backend        | Node.js, Express.js, Mongoose        |
 | 🗃️ Base de datos  | MongoDb                              |
-| 🔒 Seguridad      | dotenv, validaciones Joi, middlewares,  |
+| 🔒 Seguridad      | dotenv, validaciones, middlewares,  |
 
 
 
