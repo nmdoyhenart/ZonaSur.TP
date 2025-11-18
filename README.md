@@ -1,5 +1,7 @@
 # Proyecto Final Programación III - Nicolás Doyhenart, Bautista Elena
 
+# Nota final: 10/10
+
 Sistema web para la compra de autos y motos.
 Consta de un backend en **Node.js/Express** y un frontend estático con **HTML**, **CSS** y **JavaScript**.
 
