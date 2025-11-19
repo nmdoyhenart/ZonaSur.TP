@@ -30,14 +30,6 @@ Consta de un backend en **Node.js/Express** y un frontend estático con **HTML**
    cd backend
    npm install
    ```
-3. Crear un archivo `.env` con la configuración de la base de datos y el puerto:
-
-   ```env
-   MONGO_URL=mongodb://localhost:27017/ZonaSur-Cars
-
-   JWT_SECRET=tokenZonaSurCars
-   ```
-
 ---
 
 ## Ejecución
