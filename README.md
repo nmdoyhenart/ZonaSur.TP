@@ -30,6 +30,12 @@ Consta de un backend en **Node.js/Express** y un frontend con **HTML**, **CSS** 
    cd Backend
    npm install
    ```
+3. Dentro del directorio `Backend` crear archivo `.env`:
+
+   ```bash
+   MONGO_URL= -
+   JWT_TOKEN= -
+   ```
 ---
 
 ## Ejecución
