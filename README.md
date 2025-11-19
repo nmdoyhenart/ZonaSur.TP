@@ -3,7 +3,7 @@
 # Nota final: 10/10
 
 Sistema web para la compra de autos y motos.
-Consta de un backend en **Node.js/Express** y un frontend estático con **HTML**, **CSS** y **JavaScript**.
+Consta de un backend en **Node.js/Express** y un frontend con **HTML**, **CSS** y **JavaScript**.
 
 ---
 
@@ -16,7 +16,7 @@ Consta de un backend en **Node.js/Express** y un frontend estático con **HTML**
 
 - Node.js y npm
 - MongoDB (para la base de datos)
-- Archivo `.env` con las variables de entorno necesarias
+- Archivo `.env` con las variables de entorno necesarias (MONGO_URL y JWT_TOKEN)
 
 ---
 
@@ -24,17 +24,17 @@ Consta de un backend en **Node.js/Express** y un frontend estático con **HTML**
 
 1. Clonar el repositorio.
 
-2. Dentro del directorio `backend` instalar las dependencias:
+2. Dentro del directorio `Backend` instalar las dependencias:
 
    ```bash
-   cd backend
+   cd Backend
    npm install
    ```
 ---
 
 ## Ejecución
 
-Desde la carpeta `backend`:
+Desde la carpeta `Backend`:
 
 ```bash
 npm run dev  # inicia el servidor con nodemon
@@ -47,7 +47,7 @@ Luego el servidor quedará accesible en `http://localhost:PORT`.
 ## Estructura del proyecto
 
 ```
-backend/
+Backend/
   server.js
   package.json
   scriptAdmin.js
@@ -56,7 +56,7 @@ backend/
       middlewares/   # middlewares de Node.js
       models/        # models de usuario, administrador y los vehiculos de la pagina
       routes/        # rutas de la API
-frontend/
+Frontend/
   assets/
         css/         # estilos para el front
         js/          # scripts del programa
