@@ -1,0 +1,54 @@
+[{
+  "_id": {
+    "$oid": "690a84121e3d0ec395c89def"
+  },
+  "modelo": "Ducati Panigale V4",
+  "anio": 2023,
+  "kilometraje": 2500,
+  "cilindrada": 1100,
+  "color": "Rojo",
+  "stock": 5,
+  "precio": 49500,
+  "imagenes": [
+    "../img/ducati-panigale.jpeg",
+    "../img/ducati-panigale2.jpg",
+    "../img/ducati-panigale3.jpg"
+  ],
+  "activo": true
+},
+{
+  "_id": {
+    "$oid": "690a84aa1e3d0ec395c89df1"
+  },
+  "modelo": "Kawasaki Ninja ZX-10R",
+  "anio": 2025,
+  "kilometraje": 200,
+  "cilindrada": 1000,
+  "color": "Verde",
+  "stock": 5,
+  "precio": 32000,
+  "imagenes": [
+    "../img/kawasaki-ninja.jpg",
+    "../img/kawasaki-ninja2.jpg",
+    "../img/kawasaki-ninja3.jpeg"
+  ],
+  "activo": true
+},
+{
+  "_id": {
+    "$oid": "690a857b1e3d0ec395c89df4"
+  },
+  "modelo": "KTM RC 390",
+  "anio": 2024,
+  "kilometraje": 1000,
+  "cilindrada": 375,
+  "color": "Naranja",
+  "stock": 5,
+  "precio": 9900,
+  "imagenes": [
+    "../img/ktm.jpg",
+    "../img/ktm2.jpeg",
+    "../img/ktm3.jpeg"
+  ],
+  "activo": true
+}]

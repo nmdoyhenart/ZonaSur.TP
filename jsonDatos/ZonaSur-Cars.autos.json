@@ -1,0 +1,222 @@
+[{
+  "_id": {
+    "$oid": "6900b0b7f9f5d6f4dbc04164"
+  },
+  "modelo": "Ford F150 Raptor",
+  "kilometraje": 0,
+  "transmision": "Automática",
+  "color": "Naranja",
+  "precio": 120000,
+  "imagenes": [
+    "../img/f150.jpg",
+    "../img/f150-atras.jpg",
+    "../img/f150-interior.jpg"
+  ],
+  "anio": 2025,
+  "activo": true
+},
+{
+  "_id": {
+    "$oid": "6900b0d6f9f5d6f4dbc04166"
+  },
+  "modelo": "Toyota Corolla",
+  "kilometraje": 30000,
+  "transmision": "Manual",
+  "color": "Blanco",
+  "precio": 25700,
+  "imagenes": [
+    "../img/corolla.jpg",
+    "../img/corolla-interior.jpeg",
+    "../img/corolla-atras.jpg"
+  ],
+  "anio": 2024,
+  "activo": true
+},
+{
+  "_id": {
+    "$oid": "6900b129f9f5d6f4dbc04168"
+  },
+  "modelo": "Fiat Cronos",
+  "kilometraje": 0,
+  "transmision": "Manual",
+  "color": "Gris",
+  "precio": 20000,
+  "imagenes": [
+    "../img/fiat-cronos-2025.jpg",
+    "../img/cronos-interior.jpg",
+    "../img/cronos-atras.jpg"
+  ],
+  "anio": 2025,
+  "activo": true
+},
+{
+  "_id": {
+    "$oid": "6900b13cf9f5d6f4dbc0416a"
+  },
+  "modelo": "Toyota Crown",
+  "kilometraje": 0,
+  "transmision": "Automática",
+  "color": "Dorado",
+  "precio": 90000,
+  "imagenes": [
+    "../img/toyota-crown.jpg",
+    "../img/crown-interior.jpg",
+    "../img/crown-atras.jpg"
+  ],
+  "anio": 2025,
+  "activo": true
+},
+{
+  "_id": {
+    "$oid": "6900b151f9f5d6f4dbc0416c"
+  },
+  "modelo": "Volkswagen Golf GTI",
+  "kilometraje": 50000,
+  "transmision": "Automática",
+  "color": "Blanco",
+  "precio": 40000,
+  "imagenes": [
+    "../img/golf-gti.jpg",
+    "../img/golf-gti-interior.jpg",
+    "../img/golf-gti-atras.jpg"
+  ],
+  "anio": 2021,
+  "activo": true
+},
+{
+  "_id": {
+    "$oid": "6900b16af9f5d6f4dbc0416e"
+  },
+  "modelo": "Renault Twingo",
+  "kilometraje": 230000,
+  "transmision": "Manual",
+  "color": "Verde",
+  "precio": 6000,
+  "imagenes": [
+    "../img/twingo.jpg",
+    "../img/twingo-interior.jpg",
+    "../img/twingo-atras.jpg"
+  ],
+  "anio": 2003,
+  "activo": true
+},
+{
+  "_id": {
+    "$oid": "6900b181f9f5d6f4dbc04170"
+  },
+  "modelo": "Volkswagen Scirocco",
+  "kilometraje": 50000,
+  "transmision": "Automática",
+  "color": "Negro",
+  "precio": 40000,
+  "imagenes": [
+    "../img/scirocco.jpg",
+    "../img/scirocco-interior.jpg",
+    "../img/scirocco-atras.jpeg"
+  ],
+  "anio": 2020,
+  "activo": true
+},
+{
+  "_id": {
+    "$oid": "6900b196f9f5d6f4dbc04172"
+  },
+  "modelo": "Mercedes-Benz Clase GLC 3.0",
+  "kilometraje": 60000,
+  "transmision": "Automática",
+  "color": "Blanco",
+  "precio": 70000,
+  "imagenes": [
+    "../img/mercedes-glc.jpg",
+    "../img/mercedes-glc-interior.jpg",
+    "../img/mercedes-glc-atras.jpg"
+  ],
+  "anio": 2018,
+  "activo": true
+},
+{
+  "_id": {
+    "$oid": "6900b1adf9f5d6f4dbc04174"
+  },
+  "modelo": "Lamborghini Urus",
+  "kilometraje": 0,
+  "transmision": "Automática",
+  "color": "Violeta",
+  "precio": 700000,
+  "imagenes": [
+    "../img/lambo-urus.jpg",
+    "../img/lambo-urus-interior.jpg",
+    "../img/lambo-urus-atras.jpg"
+  ],
+  "anio": 2025,
+  "activo": true
+},
+{
+  "_id": {
+    "$oid": "6900b1c1f9f5d6f4dbc04176"
+  },
+  "modelo": "Ferrari 812 Competizione",
+  "kilometraje": 0,
+  "transmision": "Automática",
+  "color": "Azul",
+  "precio": 1600000,
+  "imagenes": [
+    "../img/ferrari812.jpg",
+    "../img/ferrari812-interior.jpg",
+    "../img/ferrari812-atras.jpg"
+  ],
+  "anio": 2025,
+  "activo": true
+},
+{
+  "_id": {
+    "$oid": "6900b2c8f9f5d6f4dbc0417c"
+  },
+  "modelo": "BMW 3 Series",
+  "kilometraje": 5000,
+  "transmision": "Automática",
+  "color": "Azul",
+  "precio": 120000,
+  "imagenes": [
+    "../img/bmw-3-series.jpg",
+    "../img/bmw-3-interior.jpeg",
+    "../img/bmw-3-atras.jpeg"
+  ],
+  "anio": 2024,
+  "activo": true
+},
+{
+  "_id": {
+    "$oid": "69026df3f96ff0ed33081231"
+  },
+  "modelo": "Mercedes-Benz C-Class",
+  "kilometraje": 20000,
+  "transmision": "Automática",
+  "color": "Negro",
+  "precio": 68000,
+  "imagenes": [
+    "../img/mercedes-c-class.jpg",
+    "../img/mercedes-interior.jpg",
+    "../img/mercedes-atras.jpg"
+  ],
+  "anio": 2020,
+  "activo": true
+},
+{
+  "_id": {
+    "$oid": "6904b460d8d561e0451294d6"
+  },
+  "modelo": "Volkswagen Up!",
+  "anio": 2015,
+  "kilometraje": 90000,
+  "transmision": "Manual",
+  "color": "Gris",
+  "precio": 8000,
+  "imagenes": [
+    "http://localhost:4000/uploads/1761916000235.jpeg",
+    "http://localhost:4000/uploads/1761916000237.jpeg",
+    "http://localhost:4000/uploads/1761916000236.jpg"
+  ],
+  "__v": 0,
+  "activo": false
+}]
